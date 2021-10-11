@@ -1,5 +1,5 @@
 <template>
-  <v-app style='background-color: #ffffff'>
+  <v-app :style='getBackgroundImage()'>
     <v-main>
       <v-container style="background-color: #ffffff; max-width: 400px" class="pa-0">
         <v-app-bar flat dense
@@ -20,7 +20,10 @@ export default {
   },
   methods: {
     getBackgroundImage () {
-      return {};
+      return {
+        'background-image': `url(${require('./assets/bg.jpg')})`,
+        'background-size': '40px'
+      };
     }
   }
 };
