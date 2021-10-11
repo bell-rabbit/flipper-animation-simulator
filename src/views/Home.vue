@@ -36,9 +36,9 @@
         <v-btn>必出4星</v-btn>
         <v-btn>必出5星</v-btn>
       </v-row>
-<!--      <v-row class="justify-center">-->
-<!--        <roll-button @click="reloadRandom" ></roll-button>-->
-<!--      </v-row>-->
+      <!--      <v-row class="justify-center">-->
+      <!--        <roll-button @click="reloadRandom" ></roll-button>-->
+      <!--      </v-row>-->
     </v-container>
 
     <!--    <input />-->
@@ -57,38 +57,45 @@
         class="subtitle-2"
     >
       <v-card>
-        <v-card-title class="text-h3 red--text d-block">
-          <v-icon large color="red">
-            mdi-alert
-          </v-icon>
-          警告
-        </v-card-title>
-        <v-card-text class="mb-0 pb-2" style="font-size: 18px;">你將會打開血壓測試模式。</v-card-text>
-        <v-card-text class="mb-0 pb-3" style="font-size: 18px;">本網頁對所有後果<span class="red--text">不會負責</span>，包括及不限於以下反應：
+        <!--        <v-card-title class="text-h3 red&#45;&#45;text d-block">-->
+        <!--          <v-icon large color="red">-->
+        <!--            mdi-alert-->
+        <!--          </v-icon>-->
+        <!--          警告-->
+        <!--        </v-card-title>-->
+        <v-card-text align="center" class="mb-0 pb-2 pt-12 pl-4 pr-4" style="font-size: 18px;">你將會打開血壓測試模式。</v-card-text>
+        <v-card-text align="center" class="mb-0 pb-3 pl-4 pr-4" style="font-size: 18px;">本網頁對所有後果<span class="red--text">不會負責</span>，包括及不限於以下反應：
         </v-card-text>
-        <v-card-text style="font-size: 18px;">
-          <ul>
-            <li>腦溢血</li>
-            <li>高血壓</li>
-            <li>中風</li>
-          </ul>
+        <v-card-text align="center" class="pl-4 pr-4" style="font-size: 18px;">
+          <br/>
+          腦溢血，高血壓，中風...
+        </v-card-text>
+        <v-card-text class="pb-0 pl-4 pr-4">
+          <v-divider />
         </v-card-text>
         <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-              color="green darken-1"
-              text
-              @click="dialog = false"
-          >
-            返回
-          </v-btn>
-          <v-btn
-              color="green darken-1"
-              @click="agree"
-              class="white--text"
-          >
-            已閱讀
-          </v-btn>
+          <v-row class="pa-0 ma-0">
+            <v-col cols="6" class="pl-0">
+              <v-btn
+                  color="#ea3653"
+                  @click="dialog = false"
+                  class="white--text"
+                  block
+              >
+                否
+              </v-btn>
+            </v-col>
+            <v-col cols="6"  class="pr-0">
+              <v-btn
+                  color="#2ec5b6"
+                  @click="agree"
+                  class="white--text"
+                  block
+              >
+                是
+              </v-btn>
+            </v-col>
+          </v-row>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -120,7 +127,7 @@ export default {
     openTest () {
       if (this.isLock) {
         this.dialog = true;
-      }else{
+      } else {
         this.isLock = true;
       }
     },
