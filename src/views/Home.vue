@@ -13,19 +13,19 @@
         </v-col>
       </v-row>
       <v-row class="justify-space-around pt-2">
-        <v-btn height="64px" @click="openTest">
-          <v-icon v-if="isLock">
+        <v-btn height="55px" @click="openTest" color="#ffffff" style="border-radius:14px;">
+          <v-icon v-if="isLock" color="#ff9f1c">
             mdi-lock
           </v-icon>
-          <v-icon v-else>
+          <v-icon v-else color="#ff9f1c">
             mdi-lock-open
           </v-icon>
         </v-btn>
-        <roll-button @click="reloadRandom" :alert="!isLock"></roll-button>
+        <roll-button @click="reloadRandom" :alert="!isLock" style="border-radius:12px;"></roll-button>
         <!--        :disabled="disabledRoll" :loading="disabledRoll"-->
         <!--        <roll-button @click="roll" :disabled="disabledRoll" :loading="disabledRoll"/>-->
-        <v-btn height="64px">
-          <v-icon>
+        <v-btn height="55px" color="#ffffff" style="border-radius:14px;">
+          <v-icon color="#ff9f1c">
             mdi-share-variant
           </v-icon>
         </v-btn>
