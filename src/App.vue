@@ -1,7 +1,7 @@
 <template>
   <v-app :style='getBackgroundImage()'>
     <v-main>
-      <v-container style="background-color: #ffffff; max-width: 400px" class="pa-0">
+      <v-container style="background-color: #ffffff; max-width: 450px" class="pa-0">
         <v-app-bar flat dense
                    :src="require('./assets/top.jpg')"
         >

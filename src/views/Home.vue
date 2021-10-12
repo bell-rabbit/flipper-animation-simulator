@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-card :min-height="$vuetify.breakpoint.height" :style="getBackgroundImage()">
     <v-container fluid>
       <v-row>
         <flipper-animation-generator ref="fag" :width="450" style="padding: unset"></flipper-animation-generator>
@@ -135,7 +135,7 @@
         </v-card>
       </v-bottom-sheet>
     </div>
-  </div>
+  </v-card>
 </template>
 
 <script>
@@ -176,7 +176,9 @@ export default {
     getBackgroundImage () {
       return {
         'background-image': `url(${require('../assets/bottom.jpg')})`,
-        'height': '400px'
+        'background-repeat': 'no-repeat',
+        'background-size': 'cover',
+        'background-position': 'bottom'
       };
     },
     openSetting () {
