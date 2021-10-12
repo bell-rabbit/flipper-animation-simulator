@@ -19,11 +19,31 @@ export default {
     alert: {
       type: Boolean,
       default: false
+    },
+    star: {
+      type: Number,
+      default: 0
     }
   },
   methods: {
     getBackgroundImage () {
       let url = this.alert ? require('../assets/alertRoll.png') : require('../assets/roll.png');
+
+      if (!this.alert){
+        switch (this.star) {
+          case 1:
+            break;
+          case 3:
+            url = require('../assets/roll_3.png')
+            break;
+          case 4:
+            url = require('../assets/roll_4.png')
+            break;
+          case 5:
+            url = require('../assets/roll_5.png')
+            break;
+        }
+      }
 
       return {
         'background-image': `url(${url})`,
