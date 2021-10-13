@@ -3,7 +3,8 @@
     <v-container fluid>
       <v-row justify="center">
         <flipper-animation-generator ref="fag"
-                                     :width="getFAGWidth()"
+                                     :width="$vuetify.breakpoint.width > 450 ?  450: $vuetify.breakpoint.width"
+                                     :height="$vuetify.breakpoint.height - 48  > 806 ? 896 : $vuetify.breakpoint.height - 48"
                                      style="padding: unset"></flipper-animation-generator>
       </v-row>
       <v-row class="align-center text-center">
@@ -148,17 +149,6 @@ export default {
     };
   },
   methods: {
-    getFAGWidth () {
-      if (this.$vuetify.breakpoint.width > 450) {
-        return 450;
-      }
-
-      if (896 > this.$vuetify.breakpoint.height - 150) {
-        return (this.$vuetify.breakpoint.height - 150) / 1.7886;
-      }
-
-      return this.$vuetify.breakpoint.width;
-    },
     shareUrl () {
       console.log(this.dialog.share);
       this.dialog.share = true;
