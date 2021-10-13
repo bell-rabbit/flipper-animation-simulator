@@ -1,5 +1,5 @@
 <template>
-  <v-card :min-height="$vuetify.breakpoint.height" :style="getBackgroundImage()">
+  <v-card :min-height="$vuetify.breakpoint.height - 48" :style="getBackgroundImage()">
     <v-container fluid>
       <v-row>
         <flipper-animation-generator ref="fag" :width="450" style="padding: unset"></flipper-animation-generator>
