@@ -29,8 +29,8 @@
         </v-btn>
         <roll-button @click="reloadRandom" :alert="!isLock" style="border-radius:12px;"
                      :star="setting.star"></roll-button>
-        <v-btn height="55px" color="#ffffff" style="border-radius:14px;">
-          <v-icon color="#ff9f1c">
+        <v-btn height="55px" color="#ffffff" style="border-radius:14px;" @click="shareUrl">
+          <v-icon color="#ff9f1c" >
             mdi-share-variant
           </v-icon>
         </v-btn>
@@ -85,66 +85,54 @@
 
     <div class="text-center">
       <v-bottom-sheet inset v-model="dialog.setting" max-width="450">
-        <v-card tile max-width="450">
-          <v-card-text class="pt-6 pb-1">
-            <v-card>
-              <v-card-text align="center" class="pb-1 text-h6 page-title">設定</v-card-text>
-              <v-card-text class="pt-0">
-                <v-checkbox
-                    v-model="setting.star"
-                    label="隨機"
-                    color="#ff9f1c"
-                    :value="1"
-                    hide-details
-                ></v-checkbox>
-                <v-checkbox
-                    v-model="setting.star"
-                    label="必定3星"
-                    color="#ff9f1c"
-                    :value="3"
-                    hide-details
-                ></v-checkbox>
-                <v-checkbox
-                    v-model="setting.star"
-                    label="必定4星"
-                    color="#ff9f1c"
-                    :value="4"
-                    hide-details
-                ></v-checkbox>
-                <v-checkbox
-                    v-model="setting.star"
-                    label="必定5星"
-                    color="#ff9f1c"
-                    :value="5"
-                    hide-details
-                ></v-checkbox>
-              </v-card-text>
-            </v-card>
-          </v-card-text>
-
-          <v-card-actions align="center" class="pl-6 pr-6">
-            <v-btn
-                color="#2ec5b6"
-                @click="dialog.setting = false"
-                class="white--text"
-                block
-            >
-              是
-            </v-btn>
-          </v-card-actions>
-        </v-card>
+        <flipper-card title="設定" v-model="dialog.setting">
+          <v-checkbox
+              v-model="setting.star"
+              label="隨機"
+              color="#ff9f1c"
+              :value="1"
+              hide-details
+          ></v-checkbox>
+          <v-checkbox
+              v-model="setting.star"
+              label="必定3星"
+              color="#ff9f1c"
+              :value="3"
+              hide-details
+          ></v-checkbox>
+          <v-checkbox
+              v-model="setting.star"
+              label="必定4星"
+              color="#ff9f1c"
+              :value="4"
+              hide-details
+          ></v-checkbox>
+          <v-checkbox
+              v-model="setting.star"
+              label="必定5星"
+              color="#ff9f1c"
+              :value="5"
+              hide-details
+          ></v-checkbox>
+        </flipper-card>
       </v-bottom-sheet>
     </div>
+
+    <share-url v-model="dialog.share"/>
   </v-card>
 </template>
 
 <script>
 import flipperAnimationGenerator from '@bell-rabbit/flipper-animation-generator';
 import RollButton from '../components/RollButton';
+import FlipperCard from '../components/FlipperCard';
+import ShareUrl from '../components/ShareUrl';
 
 export default {
   name: 'Home',
   components: {
+    ShareUrl,
+    FlipperCard,
     RollButton,
     flipperAnimationGenerator
   },
@@ -152,11 +140,16 @@ export default {
     return {
       flipperJSON: {},
       isLock: true,
-      dialog: { alert: false, setting: false },
-      setting: { star: 1 }
+      dialog: { alert: false, setting: false, share: false },
+      setting: { star: 1 },
+      total: 0
     };
   },
   methods: {
+    shareUrl(){
+      console.log(this.dialog.share);
+      this.dialog.share = true;
+    },
     agree () {
       this.dialog.alert = false;
       this.isLock = false;
@@ -187,14 +180,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.page-title:after {
-  content: "";
-  display: block;
-  margin: 0 auto;
-  width: 50%;
-  padding-top: 5px;
-  border-bottom: 1px dotted #cecece;
-}
-</style>
