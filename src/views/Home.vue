@@ -5,7 +5,9 @@
         <flipper-animation-generator ref="fag"
                                      :width="$vuetify.breakpoint.width > 450 ?  450: $vuetify.breakpoint.width"
                                      :height="$vuetify.breakpoint.height - 48  > 806 ? 896 : $vuetify.breakpoint.height - 48"
-                                     style="padding: unset"></flipper-animation-generator>
+                                     style="padding: unset"
+                                     @completed="saveRecord"
+        ></flipper-animation-generator>
       </v-row>
       <v-row class="align-center text-center">
         <v-col cols="12" class="pt-2 pb-0" v-if="isLock">
@@ -130,6 +132,7 @@ import flipperAnimationGenerator from '@bell-rabbit/flipper-animation-generator'
 import RollButton from '../components/RollButton';
 import FlipperCard from '../components/FlipperCard';
 import ShareUrl from '../components/ShareUrl';
+import API from '../plugins/api';
 
 export default {
   name: 'Home',
@@ -149,6 +152,11 @@ export default {
     };
   },
   methods: {
+    saveRecord(data){
+      API.save(data).then((rs) =>{
+        console.log(rs);
+      })
+    },
     shareUrl () {
       console.log(this.dialog.share);
       this.dialog.share = true;
