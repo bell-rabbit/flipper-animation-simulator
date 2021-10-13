@@ -1,8 +1,10 @@
 <template>
   <v-card :min-height="$vuetify.breakpoint.height - 48" :style="getBackgroundImage()">
     <v-container fluid>
-      <v-row>
-        <flipper-animation-generator ref="fag" :width="450" style="padding: unset"></flipper-animation-generator>
+      <v-row justify="center">
+        <flipper-animation-generator ref="fag"
+                                     :width="getFAGWidth()"
+                                     style="padding: unset"></flipper-animation-generator>
       </v-row>
       <v-row class="align-center text-center">
         <v-col cols="12" class="pt-2 pb-0" v-if="isLock">
@@ -28,9 +30,9 @@
           </v-icon>
         </v-btn>
         <roll-button @click="reloadRandom" :alert="!isLock" style="border-radius:12px;"
-                     :star="setting.star"></roll-button>
+                     :star="setting.star" class="mb-2"></roll-button>
         <v-btn height="55px" color="#ffffff" style="border-radius:14px;" @click="shareUrl">
-          <v-icon color="#ff9f1c" >
+          <v-icon color="#ff9f1c">
             mdi-share-variant
           </v-icon>
         </v-btn>
@@ -146,7 +148,18 @@ export default {
     };
   },
   methods: {
-    shareUrl(){
+    getFAGWidth () {
+      if (this.$vuetify.breakpoint.width > 450) {
+        return 450;
+      }
+
+      if (896 > this.$vuetify.breakpoint.height - 150) {
+        return (this.$vuetify.breakpoint.height - 150) / 1.7886;
+      }
+
+      return this.$vuetify.breakpoint.width;
+    },
+    shareUrl () {
       console.log(this.dialog.share);
       this.dialog.share = true;
     },
