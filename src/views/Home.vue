@@ -6,21 +6,24 @@
                                      :width="$vuetify.breakpoint.width > 450 ?  450: $vuetify.breakpoint.width"
                                      :height="$vuetify.breakpoint.height - 48  > 806 ? 896 : $vuetify.breakpoint.height - 48"
                                      style="padding: unset"
+                                     :value="flipperJSON"
                                      @completed="saveRecord"
         ></flipper-animation-generator>
       </v-row>
       <v-row class="align-center text-center">
         <v-col cols="12" class="pt-2 pb-0" v-if="isLock">
-          此結果為這個網站第 <span style="color: #ffcd76">{{ total }}</span> 次模擬
-
+          <span v-if="total > 0 &&  playback === false">此結果為這個網站第 <span style="color: #ffcd76">
+            {{ total }}
+          </span> 次模擬</span>
+          
           <v-btn icon x-small style="float:right" @click="openSetting()">
             <v-icon color="#ff9f1c">
               mdi-cog
             </v-icon>
           </v-btn>
         </v-col>
-        <v-col cols="12" class="pt-2 pb-0" v-else>
-          你已完成第 <span style="color: #ff9f1c">{{ total }}</span> 次測試
+        <v-col cols="12" class="pt-2 pb-0" v-else-if="!isLock">
+          血壓測試: <span style="color: #ffcd76">{{bloodPressure.list.length}}</span> / {{bloodPressure.count}}
         </v-col>
       </v-row>
       <v-row class="justify-space-around pt-2">
@@ -32,7 +35,7 @@
             mdi-lock-open
           </v-icon>
         </v-btn>
-        <roll-button @click="reloadRandom" :alert="!isLock" style="border-radius:12px;"
+        <roll-button @click="clickRoll" :alert="!isLock" style="border-radius:12px;"
                      :star="setting.star" class="mb-2"></roll-button>
         <v-btn height="55px" color="#ffffff" style="border-radius:14px;" @click="shareUrl">
           <v-icon color="#ff9f1c">
@@ -40,6 +43,7 @@
           </v-icon>
         </v-btn>
       </v-row>
+      <v-row v-if="currentId" class="ml-1">ID: {{currentId}}</v-row>
     </v-container>
 
     <v-dialog
@@ -66,7 +70,7 @@
             <v-col cols="6" class="pl-0">
               <v-btn
                   color="#ea3653"
-                  @click="dialog = false"
+                  @click="dialog.alert = false"
                   class="white--text"
                   block
               >
@@ -148,32 +152,81 @@ export default {
       isLock: true,
       dialog: { alert: false, setting: false, share: false },
       setting: { star: 1 },
-      total: 0
+      total: 0,
+      playback: false,
+      bloodPressure: { count: 0, list: [] },
+      currentId: 0
     };
   },
   methods: {
-    saveRecord(data){
-      API.save(data).then((rs) =>{
-        console.log(rs);
-      })
+    saveRecord (data) {
+      API.save(data).then((rs) => {
+        if (rs.status === 'success') {
+          this.total = rs.id;
+          this.currentId = rs.id;
+        }
+      });
     },
     shareUrl () {
       console.log(this.dialog.share);
       this.dialog.share = true;
     },
     agree () {
+      API.bloodPressureCount().then((rs) => {
+        this.bloodPressure.count = rs.data;
+      });
+
       this.dialog.alert = false;
       this.isLock = false;
+      this.currentId = 0;
     },
     openTest () {
       if (this.isLock) {
         this.dialog.alert = true;
       } else {
+        this.currentId = 0;
         this.isLock = true;
       }
     },
+    clickRoll () {
+      if (this.isLock) {
+        switch (this.setting.star) {
+          case 1:
+            this.reloadRandom();
+            break;
+          case 3:
+            this.getRecord(3);
+            break;
+          case 4:
+            this.getRecord(4);
+            break;
+          case 5:
+            this.getRecord(5);
+            break;
+        }
+      } else {
+        API.bloodPressureRecord().then((rs) => {
+          this.playback = true;
+          this.currentId = rs.id;
+          this.flipperJSON = JSON.parse(rs.data);
+
+          let inList = this.bloodPressure.list.filter(i => i === rs.id);
+
+          if (inList.length < 1) {
+            this.bloodPressure.list.push(rs.id);
+          }
+        });
+      }
+    },
+    getRecord (star) {
+      API.randomRecord(star).then((rs) => {
+        this.playback = true;
+        this.currentId= rs.id;
+        this.flipperJSON = JSON.parse(rs.data);
+      });
+    },
     reloadRandom () {
-      // this.$refs.json.value ='';
+      this.playback = false;
       this.flipperJSON = {};
       this.$refs.fag.reload();
     },
