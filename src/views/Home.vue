@@ -3,8 +3,7 @@
     <v-container fluid>
       <v-row justify="center">
         <flipper-animation-generator ref="fag"
-                                     :width="$vuetify.breakpoint.width > 450 ?  450: $vuetify.breakpoint.width"
-                                     :height="$vuetify.breakpoint.height - 48  > 806 ? 896 : $vuetify.breakpoint.height - 48"
+                                     :width="getWidth()"
                                      style="padding: unset"
                                      :value="flipperJSON"
                                      @completed="saveRecord"
@@ -159,6 +158,17 @@ export default {
     };
   },
   methods: {
+    getWidth () {
+      let maxHeight = this.$vuetify.breakpoint.height - 148;
+
+      if (maxHeight > 896) {
+        return 450;
+      }
+
+      let maxWidth = maxHeight * 0.558;
+
+      return this.$vuetify.breakpoint.width < maxWidth ? this.$vuetify.breakpoint.width : maxWidth;
+    },
     saveRecord (data) {
       API.save(data).then((rs) => {
         if (rs.status === 'success') {
@@ -247,9 +257,9 @@ export default {
     if (this.$route.query.record) {
       API.getRecord(this.$route.query.record)
           .then((rs) => {
-            setTimeout(()=>{
+            setTimeout(() => {
               this.playback = true;
-              this.currentId = this.$route.query.record ;
+              this.currentId = this.$route.query.record;
               this.flipperJSON = JSON.parse(rs.data);
             }, 1000);
           });
