@@ -11,14 +11,17 @@
         <router-view/>
       </v-container>
     </v-main>
+
+    <snackbar ref="snackbar"></snackbar>
   </v-app>
 </template>
 
 <script>
 import GithubCorner from './components/GithubCorner';
+import Snackbar from './components/Snackbar';
 export default {
   name: 'App',
-  components: { GithubCorner },
+  components: { Snackbar, GithubCorner },
   methods: {
     getBackgroundImage () {
       return {
@@ -26,6 +29,9 @@ export default {
         'background-size': '40px'
       };
     }
-  }
+  },
+  mounted () {
+    this.$root.$snackbar = this.$refs.snackbar;
+  },
 };
 </script>
