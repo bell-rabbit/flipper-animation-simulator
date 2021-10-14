@@ -167,7 +167,11 @@ export default {
 
       let maxWidth = maxHeight * 0.558;
 
-      return this.$vuetify.breakpoint.width < maxWidth ? this.$vuetify.breakpoint.width : maxWidth;
+      if(this.$vuetify.breakpoint.width < maxWidth ){
+        return this.$vuetify.breakpoint.width ;
+      }
+
+      return maxWidth > 450 ? 450 : maxWidth;
     },
     saveRecord (data) {
       API.save(data).then((rs) => {
