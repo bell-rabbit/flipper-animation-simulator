@@ -167,8 +167,8 @@ export default {
 
       let maxWidth = maxHeight * 0.558;
 
-      if(this.$vuetify.breakpoint.width < maxWidth ){
-        return this.$vuetify.breakpoint.width ;
+      if (this.$vuetify.breakpoint.width < maxWidth) {
+        return this.$vuetify.breakpoint.width;
       }
 
       return maxWidth > 450 ? 450 : maxWidth;
@@ -206,19 +206,24 @@ export default {
       if (this.isLock) {
         switch (this.setting.star) {
           case 1:
+            this.$gtag.event('roll', { method: 'Google', 'event_category': 'Random' });
             this.reloadRandom();
             break;
           case 3:
+            this.$gtag.event('record', { method: 'Google', 'event_category': 'star3' });
             this.getRecord(3);
             break;
           case 4:
+            this.$gtag.event('record', { method: 'Google', 'event_category': 'star4' });
             this.getRecord(4);
             break;
           case 5:
+            this.$gtag.event('record', { method: 'Google', 'event_category': 'star5' });
             this.getRecord(5);
             break;
         }
       } else {
+        this.$gtag.event('bloodPressure', { method: 'Google', 'event_category': 'record' });
         API.bloodPressureRecord().then((rs) => {
           this.playback = true;
           this.currentId = parseInt(rs.id);
@@ -259,6 +264,7 @@ export default {
   },
   mounted () {
     if (this.$route.query.record) {
+      this.$gtag.event('record', { method: 'Google', 'event_category': 'url' });
       API.getRecord(this.$route.query.record)
           .then((rs) => {
             setTimeout(() => {
@@ -268,6 +274,8 @@ export default {
             }, 1000);
           });
     }
+
+    this.$gtag.pageview(this.$route);
   }
 };
 </script>
