@@ -1,9 +1,9 @@
 <template>
-  <v-card :min-height="$vuetify.breakpoint.height - 48" :style="getBackgroundImage()">
+  <v-card :min-height="cardHeight" :style="getBackgroundImage()">
     <v-container fluid>
       <v-row justify="center">
         <flipper-animation-generator ref="fag"
-                                     :width="getWidth()"
+                                     :width="fagWidth"
                                      style="padding: unset"
                                      :value="flipperJSON"
                                      @completed="saveRecord"
@@ -262,20 +262,26 @@ export default {
       this.dialog.setting = true;
     }
   },
+  computed: {
+    cardHeight () {
+      return this.$vuetify.breakpoint.height - 48;
+    },
+    fagWidth () {
+      return this.getWidth();
+    }
+  },
   mounted () {
     if (this.$route.query.record) {
+      this.currentId = this.$route.query.record;
       this.$gtag.event('record', { method: 'Google', 'event_category': 'url' });
       API.getRecord(this.$route.query.record)
           .then((rs) => {
             setTimeout(() => {
               this.playback = true;
-              this.currentId = this.$route.query.record;
               this.flipperJSON = JSON.parse(rs.data);
             }, 1000);
           });
     }
-
-    this.$gtag.pageview(this.$route);
   }
 };
 </script>
