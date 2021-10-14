@@ -2,20 +2,24 @@
   <div class="text-center">
     <v-bottom-sheet inset v-model="dialog" max-width="450">
       <flipper-card title="分享" v-model="dialog">
-        <v-text-field
-            class="mt-2"
-            label="Share url"
-            filled
-            dense
-            hide-details
-            single-line
-            :value="shareUrl"
-            append-icon="mdi-content-copy"
-            @click:append="copyUrl()"
-        ></v-text-field>
-        <v-row class="justify-end pt-3" v-if="canShare">
-          <v-btn class="mt-3 mr-3 orange--text lighten-2" color="#FFFFFF" @click="share">分享</v-btn>
-        </v-row>
+        <v-container fluid class="pa-0">
+          <v-row class="pa-3">
+              <v-text-field
+                  class="mt-2"
+                  label="Share url"
+                  filled
+                  dense
+                  hide-details
+                  single-line
+                  :value="shareUrl"
+                  disabled
+              ></v-text-field>
+          </v-row>
+          <v-row class="justify-end pb-3">
+              <v-btn class="mr-3 orange--text lighten-2" color="#FFFFFF" icon @click="copyUrl()"><v-icon>mdi-content-copy</v-icon></v-btn>
+              <v-btn class="mr-3 orange--text lighten-2" color="#FFFFFF" icon @click="share" v-if="canShare"><v-icon>mdi-share-variant</v-icon></v-btn>
+          </v-row>
+        </v-container>
       </flipper-card>
     </v-bottom-sheet>
   </div>
