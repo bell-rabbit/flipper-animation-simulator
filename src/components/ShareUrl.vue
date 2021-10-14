@@ -11,7 +11,11 @@
             single-line
             :value="shareUrl"
             append-icon="mdi-content-copy"
+            @click:append="copyUrl()"
         ></v-text-field>
+        <v-row class="justify-end pt-3" v-if="canShare">
+          <v-btn class="mt-3 mr-3 orange--text lighten-2" color="#FFFFFF" @click="share">分享</v-btn>
+        </v-row>
       </flipper-card>
     </v-bottom-sheet>
   </div>
@@ -28,21 +32,55 @@ export default {
       type: Boolean,
       default: false
     },
+    currentId: {
+      type: Number,
+      default: 0
+    }
   },
   data () {
     return {
       dialog: this.value,
-      shareUrl : "http://192.168.100.147:8080/"
+      shareUrl: '',
+      canShare: false
     };
+  },
+  methods: {
+    copyUrl () {
+      let tempInput = document.createElement('input');
+      tempInput.value = this.shareUrl;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+
+      this.$root.$snackbar.Show('複製完成');
+    },
+    share () {
+      navigator.share({
+        text: this.currentId === 0 ? '來模擬一下跳台動畫吧!!' : '分享了一次跳台動畫記錄給你!',
+        title: '彈珠跳台動畫模擬器',
+        url: this.shareUrl
+      });
+    }
+  },
+  mounted () {
+    if (navigator.canShare) {
+      this.canShare = true;
+    }
   },
   watch: {
     dialog (newValue) {
       this.$emit('input', newValue);
     },
     value (newValue) {
+      if (this.currentId) {
+        this.shareUrl = `${window.location.origin}?record=${this.currentId}`;
+      } else {
+        this.shareUrl = `${window.location.origin}`;
+      }
       this.dialog = newValue;
     }
-  },
+  }
 };
 </script>
 

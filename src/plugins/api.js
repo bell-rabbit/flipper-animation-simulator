@@ -55,6 +55,14 @@ export default {
       }
     }).then(res => res.json());
   },
+  getRecord(recordId){
+    return fetch(`api/flipper/record/${recordId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.json());
+  },
   resourceURL,
   /**
    * @param {string} pool

@@ -15,7 +15,7 @@
           <span v-if="total > 0 &&  playback === false">此結果為這個網站第 <span style="color: #ffcd76">
             {{ total }}
           </span> 次模擬</span>
-          
+
           <v-btn icon x-small style="float:right" @click="openSetting()">
             <v-icon color="#ff9f1c">
               mdi-cog
@@ -23,7 +23,7 @@
           </v-btn>
         </v-col>
         <v-col cols="12" class="pt-2 pb-0" v-else-if="!isLock">
-          血壓測試: <span style="color: #ffcd76">{{bloodPressure.list.length}}</span> / {{bloodPressure.count}}
+          血壓測試: <span style="color: #ffcd76">{{ bloodPressure.list.length }}</span> / {{ bloodPressure.count }}
         </v-col>
       </v-row>
       <v-row class="justify-space-around pt-2">
@@ -43,7 +43,7 @@
           </v-icon>
         </v-btn>
       </v-row>
-      <v-row v-if="currentId" class="ml-1">ID: {{currentId}}</v-row>
+      <v-row v-if="currentId" class="ml-1">ID: {{ currentId }}</v-row>
     </v-container>
 
     <v-dialog
@@ -127,7 +127,7 @@
       </v-bottom-sheet>
     </div>
 
-    <share-url v-model="dialog.share"/>
+    <share-url v-model="dialog.share" :current-id="currentId"/>
   </v-card>
 </template>
 
@@ -163,7 +163,7 @@ export default {
       API.save(data).then((rs) => {
         if (rs.status === 'success') {
           this.total = rs.id;
-          this.currentId = rs.id;
+          this.currentId = parseInt(rs.id);
         }
       });
     },
@@ -207,7 +207,7 @@ export default {
       } else {
         API.bloodPressureRecord().then((rs) => {
           this.playback = true;
-          this.currentId = rs.id;
+          this.currentId = parseInt(rs.id);
           this.flipperJSON = JSON.parse(rs.data);
 
           let inList = this.bloodPressure.list.filter(i => i === rs.id);
@@ -221,11 +221,12 @@ export default {
     getRecord (star) {
       API.randomRecord(star).then((rs) => {
         this.playback = true;
-        this.currentId= rs.id;
+        this.currentId = rs.id;
         this.flipperJSON = JSON.parse(rs.data);
       });
     },
     reloadRandom () {
+      this.currentId = 0;
       this.playback = false;
       this.flipperJSON = {};
       this.$refs.fag.reload();
@@ -240,6 +241,18 @@ export default {
     },
     openSetting () {
       this.dialog.setting = true;
+    }
+  },
+  mounted () {
+    if (this.$route.query.record) {
+      API.getRecord(this.$route.query.record)
+          .then((rs) => {
+            setTimeout(()=>{
+              this.playback = true;
+              this.currentId = this.$route.query.record ;
+              this.flipperJSON = JSON.parse(rs.data);
+            }, 1000);
+          });
     }
   }
 };
