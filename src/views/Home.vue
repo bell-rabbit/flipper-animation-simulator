@@ -7,6 +7,7 @@
                                      style="padding: unset"
                                      :value="flipperJSON"
                                      @completed="saveRecord"
+                                     @completed-playback="completedPlayback"
         ></flipper-animation-generator>
       </v-row>
       <v-row class="align-center text-center">
@@ -35,7 +36,7 @@
           </v-icon>
         </v-btn>
         <roll-button @click="clickRoll" :alert="!isLock" style="border-radius:12px;"
-                     :star="setting.star" class="mb-2"></roll-button>
+                     :star="setting.star" class="mb-2" :loading="loading" :disabled="loading"></roll-button>
         <v-btn height="55px" color="#ffffff" style="border-radius:14px;" @click="shareUrl">
           <v-icon color="#ff9f1c">
             mdi-share-variant
@@ -154,7 +155,8 @@ export default {
       total: 0,
       playback: false,
       bloodPressure: { count: 0, list: [] },
-      currentId: 0
+      currentId: 0,
+      loading: false
     };
   },
   methods: {
@@ -174,12 +176,16 @@ export default {
       return maxWidth > 450 ? 450 : maxWidth;
     },
     saveRecord (data) {
+      this.loading = false;
       API.save(data).then((rs) => {
         if (rs.status === 'success') {
           this.total = rs.id;
           this.currentId = parseInt(rs.id);
         }
       });
+    },
+    completedPlayback(){
+      this.loading = false;
     },
     shareUrl () {
       console.log(this.dialog.share);
@@ -203,6 +209,7 @@ export default {
       }
     },
     clickRoll () {
+      this.loading = true;
       if (this.isLock) {
         switch (this.setting.star) {
           case 1:
