@@ -3,7 +3,7 @@
     <template v-slot:loader>
         <v-progress-circular
             indeterminate
-            color="red"
+            color="#ea3653"
         ></v-progress-circular>
     </template>
   </v-btn>
