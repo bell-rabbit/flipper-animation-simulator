@@ -247,7 +247,7 @@ export default {
     getRecord (star) {
       API.randomRecord(star).then((rs) => {
         this.playback = true;
-        this.currentId = rs.id;
+        this.currentId =  parseInt(rs.id);
         this.flipperJSON = JSON.parse(rs.data);
       });
     },
