@@ -5,6 +5,10 @@ import vuetify from './plugins/vuetify';
 
 import VueGtag from 'vue-gtag';
 
+import VueClipboard from 'vue-clipboard2'
+VueClipboard.config.autoSetContainer = true;
+
+Vue.use(VueClipboard)
 Vue.use(VueGtag,
   { config: { id: '<id>' },
   pageTrackerScreenviewEnabled: true },
