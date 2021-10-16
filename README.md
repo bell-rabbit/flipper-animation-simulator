@@ -3,6 +3,7 @@
 ![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/m789451157-78f49e0cce471d85607d06d9?style=for-the-badge)
 [![License](https://img.shields.io/github/license/bell-rabbit/flipper-animation-simulator?style=for-the-badge)](/LICENSE)
 ![GitHub issues](https://img.shields.io/github/issues/bell-rabbit/flipper-animation-simulator?style=for-the-badge)
+![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/bell-rabbit/flipper-animation-simulator/@bell-rabbit/flipper-animation-generator?style=for-the-badge)
 
 <br />
 <div align="center">
@@ -17,6 +18,9 @@
     <a href="https://github.com/bell-rabbit/flipper-animation-simulator/issues">新功能提議</a>
   </p>
 </div>
+
+## 依賴
+[@bell-rabbit/flipper-animation-generator](https://github.com/bell-rabbit/flipper-animation-generator)
 
 ## 預覽圖片
 <table>
