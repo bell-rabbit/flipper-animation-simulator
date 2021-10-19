@@ -156,7 +156,8 @@ export default {
       playback: false,
       bloodPressure: { count: 0, list: [] },
       currentId: 0,
-      loading: false
+      loading: false,
+      createMode: false
     };
   },
   methods: {
@@ -184,7 +185,7 @@ export default {
         }
       });
     },
-    completedPlayback(){
+    completedPlayback () {
       this.loading = false;
     },
     shareUrl () {
@@ -213,8 +214,13 @@ export default {
       if (this.isLock) {
         switch (this.setting.star) {
           case 1:
-            this.$gtag.event('roll', { method: 'Google', 'event_category': 'Random' });
-            this.reloadRandom();
+            if (this.createMode) {
+              this.$gtag.event('roll', { method: 'Google', 'event_category': 'Random' });
+              this.reloadRandom();
+            } else {
+              this.$gtag.event('record', { method: 'Google', 'event_category': 'Random' });
+              this.randomRecord();
+            }
             break;
           case 3:
             this.$gtag.event('record', { method: 'Google', 'event_category': 'star3' });
@@ -244,10 +250,36 @@ export default {
         });
       }
     },
+    randomRecord () {
+      let number = this.getRandomInt(140000);
+      this.currentId = number;
+      this.playRecord(number, 0)
+          .catch(() => {
+            this.randomRecord ();
+          });
+    },
+    getRandomInt (max) {
+      return Math.floor(Math.random() * max);
+    },
+    playRecord (recordId, timeout) {
+      return API.getRecord(recordId)
+          .then((rs) => {
+            if (rs.status === 'empty') {
+              return new Promise((resolve, reject) => {
+                reject();
+              });
+            } else {
+              setTimeout(() => {
+                this.playback = true;
+                this.flipperJSON = JSON.parse(rs.data);
+              }, timeout);
+            }
+          });
+    },
     getRecord (star) {
       API.randomRecord(star).then((rs) => {
         this.playback = true;
-        this.currentId =  parseInt(rs.id);
+        this.currentId = parseInt(rs.id);
         this.flipperJSON = JSON.parse(rs.data);
       });
     },
@@ -281,13 +313,7 @@ export default {
     if (this.$route.query.record) {
       this.currentId = this.$route.query.record;
       this.$gtag.event('record', { method: 'Google', 'event_category': 'url' });
-      API.getRecord(this.$route.query.record)
-          .then((rs) => {
-            setTimeout(() => {
-              this.playback = true;
-              this.flipperJSON = JSON.parse(rs.data);
-            }, 1000);
-          });
+      this.playRecord(this.$route.query.record, 1000);
     }
   }
 };
