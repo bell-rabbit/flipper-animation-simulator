@@ -57,7 +57,7 @@ export default {
   },
   getRecord(recordId){
     return fetch(`api/flipper/record/${recordId}`, {
-      method: 'POST',
+      method: 'get',
       headers: {
         'Content-Type': 'application/json'
       }
