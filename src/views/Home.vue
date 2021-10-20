@@ -10,20 +10,39 @@
                                      @completed-playback="completedPlayback"
         ></flipper-animation-generator>
       </v-row>
-      <v-row class="align-center text-center">
-        <v-col cols="12" class="pt-2 pb-0" v-if="isLock">
-          <span v-if="total > 0 &&  playback === false" v-html="$t('message.simulation_record', { total })"></span>
+      <v-row v-if="isLock">
+        <v-col cols="4" class="pt-2 pb-0">
+            <span style="float:left" v-if="currentId">
+                ID: {{ currentId }}
+          </span>
+        </v-col>
 
+        <v-col cols="4" class="pt-2 pb-0 pr-0 pl-0 text-center">
+          <span v-if="total > 0 &&  playback === false" v-html="$t('message.simulation_record', { total })"></span>
+        </v-col>
+
+        <v-col cols="4" class="pt-2 pb-0">
           <v-btn icon x-small style="float:right" @click="openSetting()">
             <v-icon color="#ff9f1c">
               mdi-cog
             </v-icon>
           </v-btn>
         </v-col>
-        <v-col cols="12" class="pt-2 pb-0" v-else-if="!isLock">
-          {{ $t('blood_pressure_test.t') }}: <span style="color: #ffcd76">{{ bloodPressure.list.length }}</span> /
-          {{ bloodPressure.count }}
+      </v-row>
+      <v-row v-else-if="!isLock">
+        <v-col cols="4" class="pt-2 pb-0">
+            <span style="float:left" v-if="currentId">
+                ID: {{ currentId }}
+          </span>
         </v-col>
+        <v-spacer></v-spacer>
+        <v-col class="pt-2 pb-0">
+          <span class="pt-2 pb-0 pr-0 pl-0 text-center">
+           <span style="color: #ffcd76">{{ bloodPressure.list.length }}</span> /{{ bloodPressure.count }}
+          </span>
+        </v-col>
+        <v-spacer></v-spacer>
+        <v-col cols="4"></v-col>
       </v-row>
       <v-row class="justify-space-around pt-2">
         <v-btn height="55px" @click="openTest" color="#ffffff" style="border-radius:14px;">
@@ -42,7 +61,6 @@
           </v-icon>
         </v-btn>
       </v-row>
-      <v-row v-if="currentId" class="ml-1">ID: {{ currentId }}</v-row>
     </v-container>
 
     <v-dialog
@@ -103,7 +121,8 @@
               :label="$t('language.t')"
           ></v-select>
 
-          <a href="https://poeditor.com/join/project?hash=TdCGQW1xiz" style="color: #ff9f1c" target="_blank">Click here to improve the language resource file.</a>
+          <a href="https://poeditor.com/join/project?hash=TdCGQW1xiz" style="color: #ff9f1c" target="_blank">Click here
+            to improve the language resource file.</a>
 
           <v-checkbox
               v-model="setting.star"

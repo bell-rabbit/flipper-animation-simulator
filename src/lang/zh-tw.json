@@ -5,7 +5,7 @@
     "description": "一個模擬彈珠世界跳台動畫的網頁。包括隨機生成，必定3/4/5星及血壓測試模式。防止中風，腦溢血及高血壓。"
   },
   "message": {
-    "simulation_record": "此結果為這個網站第 <span style=\"color: #ffcd76\">{total}</span> 次模擬"
+    "simulation_record": "第 <span style=\"color: #ffcd76\">{total}</span> 次模擬"
   },
   "setting": {
     "t": "設定",
