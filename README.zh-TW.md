@@ -32,7 +32,7 @@
 ![POEditor](https://img.shields.io/poeditor/progress/484045/ja?style=for-the-badge&token=fb74d07f6576ae283c69ba10ff552d91)
 ![POEditor](https://img.shields.io/poeditor/progress/484045/ko?style=for-the-badge&token=fb74d07f6576ae283c69ba10ff552d91)
 
-[Poeditor](https://poeditor.com/join/project?hash=TdCGQW1xiz)
+[POEditor](https://poeditor.com/join/project?hash=TdCGQW1xiz)
 
 ## 預覽圖片
 <table>
