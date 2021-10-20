@@ -167,7 +167,7 @@ export default {
       bloodPressure: { count: 0, list: [] },
       currentId: 0,
       loading: false,
-      createMode: true,
+      createMode: false,
       language: [
         { text: this.$tc('language.zh-tw'), value: 'zh-tw' }
       ],
