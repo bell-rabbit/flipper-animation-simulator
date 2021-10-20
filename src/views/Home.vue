@@ -35,13 +35,11 @@
                 ID: {{ currentId }}
           </span>
         </v-col>
-        <v-spacer></v-spacer>
-        <v-col class="pt-2 pb-0">
+        <v-col  cols="4" class="pt-2 pb-0 pr-0 pl-0 text-center">
           <span class="pt-2 pb-0 pr-0 pl-0 text-center">
            <span style="color: #ffcd76">{{ bloodPressure.list.length }}</span> /{{ bloodPressure.count }}
           </span>
         </v-col>
-        <v-spacer></v-spacer>
         <v-col cols="4"></v-col>
       </v-row>
       <v-row class="justify-space-around pt-2">
