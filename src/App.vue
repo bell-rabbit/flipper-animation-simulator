@@ -6,7 +6,7 @@
         <v-app-bar flat dense
                    :src="require('./assets/top.jpg')"
         >
-          <v-toolbar-title class="white--text" >{{$t('app.title')}}</v-toolbar-title>
+          <v-toolbar-title class="white--text" >{{$t('app.nav')}}</v-toolbar-title>
         </v-app-bar>
         <router-view/>
       </v-container>

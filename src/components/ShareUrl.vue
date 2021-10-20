@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
     <v-bottom-sheet inset v-model="dialog" max-width="450">
-      <flipper-card title="分享" v-model="dialog">
+      <flipper-card :title="$t('share_url.share')" v-model="dialog">
         <v-container fluid class="pa-0">
           <v-row class="pa-3">
             <v-text-field
@@ -60,15 +60,15 @@ export default {
   },
   methods: {
     onCopy () {
-      this.$root.$snackbar.Show('複製完成');
+      this.$root.$snackbar.Show(this.$tc('share_url.copy.success'));
     },
     onError () {
-      this.$root.$snackbar.Show('複製出現問題', 'error');
+      this.$root.$snackbar.Show(this.$tc('share_url.copy.error'), this.$tc('share_url.error'));
     },
     share () {
       navigator.share({
-        text: this.currentId === 0 ? '來模擬一下跳台動畫吧!!' : '分享了一次跳台動畫記錄給你!',
-        title: '彈珠跳台動畫模擬器',
+        text: this.currentId === 0 ? this.$tc('share_url.lets_simulate_the_jumping_animation') : this.$tc('share_url.share_a_record_to_you'),
+        title: this.$tc('app.nav'),
         url: this.shareUrl
       });
     }

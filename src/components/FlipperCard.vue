@@ -2,9 +2,9 @@
   <v-card tile max-width="450">
     <v-card-text class="pt-6 pb-1">
       <v-card>
-        <v-card-text align="center" class="pb-1 text-h6 dialog-title">{{title}}</v-card-text>
+        <v-card-text align="center" class="pb-1 text-h6 dialog-title">{{ title }}</v-card-text>
         <v-card-text class="pt-0">
-        <slot/>
+          <slot/>
         </v-card-text>
       </v-card>
     </v-card-text>
@@ -16,7 +16,7 @@
           class="white--text"
           block
       >
-        是
+        {{ $t('dialog.yes') }}
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -28,7 +28,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: ""
+      default: ''
     },
   },
 };

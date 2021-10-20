@@ -12,9 +12,7 @@
       </v-row>
       <v-row class="align-center text-center">
         <v-col cols="12" class="pt-2 pb-0" v-if="isLock">
-          <span v-if="total > 0 &&  playback === false">此結果為這個網站第 <span style="color: #ffcd76">
-            {{ total }}
-          </span> 次模擬</span>
+          <span v-if="total > 0 &&  playback === false" v-html="$t('message.simulation_record', { total })"></span>
 
           <v-btn icon x-small style="float:right" @click="openSetting()">
             <v-icon color="#ff9f1c">
@@ -23,7 +21,8 @@
           </v-btn>
         </v-col>
         <v-col cols="12" class="pt-2 pb-0" v-else-if="!isLock">
-          血壓測試: <span style="color: #ffcd76">{{ bloodPressure.list.length }}</span> / {{ bloodPressure.count }}
+          {{ $t('blood_pressure_test.t') }}: <span style="color: #ffcd76">{{ bloodPressure.list.length }}</span> /
+          {{ bloodPressure.count }}
         </v-col>
       </v-row>
       <v-row class="justify-space-around pt-2">
@@ -53,14 +52,15 @@
         class="subtitle-2"
     >
       <v-card>
-        <v-card-text align="center" class="mb-0 pb-2 pt-12 pl-4 pr-4" style="font-size: 18px;">你將會打開血壓測試模式。
+        <v-card-text align="center" class="mb-0 pb-2 pt-12 pl-4 pr-4" style="font-size: 18px;">
+          {{ $t('warning_message.you_will_open_the_blood_pressure_test_mode') }}
         </v-card-text>
-        <v-card-text align="center" class="mb-0 pb-3 pl-4 pr-4" style="font-size: 18px;">本網頁對所有後果<span
-            class="red--text">不會負責</span>，包括及不限於以下反應：
+        <v-card-text align="center" class="mb-0 pb-3 pl-4 pr-4" style="font-size: 18px;"
+                     v-html="$t('warning_message.this_website_will_not_be_responsible_for_all_consequences')">
         </v-card-text>
         <v-card-text align="center" class="pl-4 pr-4" style="font-size: 18px;">
           <br/>
-          腦溢血，高血壓，中風...
+          {{ $t('warning_message.example') }}
         </v-card-text>
         <v-card-text class="pb-0 pl-4 pr-4">
           <v-divider/>
@@ -74,7 +74,7 @@
                   class="white--text"
                   block
               >
-                否
+                {{ $t('dialog.no') }}
               </v-btn>
             </v-col>
             <v-col cols="6" class="pr-0">
@@ -84,7 +84,7 @@
                   class="white--text"
                   block
               >
-                是
+                {{ $t('dialog.yes') }}
               </v-btn>
             </v-col>
           </v-row>
@@ -94,31 +94,31 @@
 
     <div class="text-center">
       <v-bottom-sheet inset v-model="dialog.setting" max-width="450">
-        <flipper-card title="設定" v-model="dialog.setting">
+        <flipper-card :title="$t('setting.t')" v-model="dialog.setting">
           <v-checkbox
               v-model="setting.star"
-              label="隨機"
+              :label="$t('setting.random_record')"
               color="#ff9f1c"
               :value="1"
               hide-details
           ></v-checkbox>
           <v-checkbox
               v-model="setting.star"
-              label="必定3星"
+              :label="$t('setting.specify_record.3_star_ball')"
               color="#ff9f1c"
               :value="3"
               hide-details
           ></v-checkbox>
           <v-checkbox
               v-model="setting.star"
-              label="必定4星"
+              :label="$t('setting.specify_record.4_star_ball')"
               color="#ff9f1c"
               :value="4"
               hide-details
           ></v-checkbox>
           <v-checkbox
               v-model="setting.star"
-              label="必定5星"
+              :label="$t('setting.specify_record.5_star_ball')"
               color="#ff9f1c"
               :value="5"
               hide-details
@@ -157,7 +157,7 @@ export default {
       bloodPressure: { count: 0, list: [] },
       currentId: 0,
       loading: false,
-      createMode: false
+      createMode: true
     };
   },
   methods: {
@@ -255,7 +255,7 @@ export default {
       this.currentId = number;
       this.playRecord(number, 0)
           .catch(() => {
-            this.randomRecord ();
+            this.randomRecord();
           });
     },
     getRandomInt (max) {
