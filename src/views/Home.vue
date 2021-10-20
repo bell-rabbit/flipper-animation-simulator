@@ -95,6 +95,16 @@
     <div class="text-center">
       <v-bottom-sheet inset v-model="dialog.setting" max-width="450">
         <flipper-card :title="$t('setting.t')" v-model="dialog.setting">
+          <v-select
+              :items="language"
+              v-model="selectLanguage"
+              item-text="text"
+              item-value="value"
+              :label="$t('language.t')"
+          ></v-select>
+
+          <a href="https://poeditor.com/join/project?hash=TdCGQW1xiz" style="color: #ff9f1c" target="_blank">Click here to improve the language resource file.</a>
+
           <v-checkbox
               v-model="setting.star"
               :label="$t('setting.random_record')"
@@ -157,7 +167,11 @@ export default {
       bloodPressure: { count: 0, list: [] },
       currentId: 0,
       loading: false,
-      createMode: true
+      createMode: true,
+      language: [
+        { text: this.$tc('language.zh-tw'), value: 'zh-tw' }
+      ],
+      selectLanguage: { text: this.$tc('language.zh-tw'), value: 'zh-tw' }
     };
   },
   methods: {

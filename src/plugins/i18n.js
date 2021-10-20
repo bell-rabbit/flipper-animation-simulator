@@ -7,6 +7,7 @@ Vue.use(VueI18n)
 // import en from './lang/en.json';
 import zhTW from '../lang/zh-tw.json';
 // import ja from './lang/ja.json';
+// import ko from './lang/ko.json';
 
 const messages = {
   'zh-tw':zhTW
