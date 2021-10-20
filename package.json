@@ -9,7 +9,7 @@
     "i18n:report": "vue-cli-service i18n:report --src \\\"./src/**/*.?(js|vue)\\\" --locales \\\"src/lang/**/*.json\\\""
   },
   "dependencies": {
-    "@bell-rabbit/flipper-animation-generator": "^1.2.0",
+    "@bell-rabbit/flipper-animation-generator": "^1.2.2",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
     "vue-clipboard2": "^0.3.3",
