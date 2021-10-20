@@ -20,6 +20,7 @@
 
 ## 依賴
 [@bell-rabbit/flipper-animation-generator](https://github.com/bell-rabbit/flipper-animation-generator)
+
 ![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/bell-rabbit/flipper-animation-simulator/@bell-rabbit/flipper-animation-generator?style=for-the-badge)
 
 ## 語言
