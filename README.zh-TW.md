@@ -16,6 +16,11 @@
     ·
     <a href="https://github.com/bell-rabbit/flipper-animation-simulator/issues">新功能提議</a>
   </p>
+  <p>
+    <a href="/README.md">English</a>
+    ·
+    <a href="/README.zh-TW.md">中文</a>
+  </p>
 </div>
 
 ## 依賴
