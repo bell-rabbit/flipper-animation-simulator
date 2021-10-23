@@ -134,7 +134,6 @@ export default {
       this.loading = false;
     },
     shareUrl () {
-      console.log(this.dialog.share);
       this.dialog.share = true;
     },
     agree () {

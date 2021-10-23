@@ -75,7 +75,6 @@ export default {
         return this.star;
       },
       set (value) {
-        console.log(value);
         this.$emit("update:star", value);
       }
     }
