@@ -15,6 +15,7 @@
     "vue-clipboard2": "^0.3.3",
     "vue-gtag": "^1.16.1",
     "vue-i18n": "^8.26.3",
+    "vue-meta": "^2.4.0",
     "vue-router": "^3.2.0",
     "vuetify": "^2.4.0"
   },
@@ -52,15 +53,40 @@
       "parser": "babel-eslint"
     },
     "rules": {
-      "semi": ["error", "always"],
-      "quotes": ["error", "double"],
-      "complexity": ["error", 4],
-      "arrow-parens": ["error", "always"],
+      "semi": [
+        "error",
+        "always"
+      ],
+      "quotes": [
+        "error",
+        "double"
+      ],
+      "complexity": [
+        "error",
+        4
+      ],
+      "arrow-parens": [
+        "error",
+        "always"
+      ],
       "no-undefined": "error",
-      "no-console": ["warn", { "allow": ["warn", "error"] }],
+      "no-console": [
+        "warn",
+        {
+          "allow": [
+            "warn",
+            "error"
+          ]
+        }
+      ],
       "object-shorthand": "error",
       "camelcase": "error",
-      "new-cap": ["error", { "newIsCap": true }]
+      "new-cap": [
+        "error",
+        {
+          "newIsCap": true
+        }
+      ]
     }
   },
   "browserslist": [

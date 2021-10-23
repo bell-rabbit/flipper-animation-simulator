@@ -155,10 +155,16 @@ export default {
     },
     defaultRoll () {
       if (this.createMode) {
-        this.$gtag.event("roll", { method: "Google", event_category: "Random" });
+        this.$gtag.event("roll", {
+          method: "Google",
+          event_category: "Random"
+        });
         this.reloadRandom();
       } else {
-        this.$gtag.event("record", { method: "Google", event_category: "Random" });
+        this.$gtag.event("record", {
+          method: "Google",
+          event_category: "Random"
+        });
         this.randomRecord();
       }
     },
@@ -188,7 +194,10 @@ export default {
         return;
       }
 
-      this.$gtag.event("record", { method: "Google", event_category: `star${this.setting.star}` });
+      this.$gtag.event("record", {
+        method: "Google",
+        event_category: `star${this.setting.star}`
+      });
       this.getRecord(this.setting.star);
     },
     randomRecord () {

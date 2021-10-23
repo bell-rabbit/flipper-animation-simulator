@@ -3,11 +3,15 @@ import App from "./App.vue";
 import router from "./router";
 import vuetify from "./plugins/vuetify";
 import i18n from "./plugins/i18n";
-
 import VueClipboard from "vue-clipboard2";
-
 import VueGtag from "vue-gtag";
+import VueMeta from "vue-meta";
+
 VueClipboard.config.autoSetContainer = true;
+
+Vue.use(VueMeta, {
+  refreshOnceOnNavigation: true
+});
 
 Vue.use(VueClipboard);
 Vue.use(VueGtag,

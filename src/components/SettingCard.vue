@@ -92,6 +92,7 @@ export default {
   watch: {
     selectLanguage (newValue) {
       this.$root.$i18n.locale = newValue;
+      this.$root.updateMeta();
     }
   }
 };

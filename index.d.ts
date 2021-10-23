@@ -4,4 +4,5 @@ interface snackbar{
 
 interface Vue {
     $snackbar: snackbar;
+    updateMeta(): void;
 }

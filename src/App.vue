@@ -26,6 +26,15 @@ export default {
     Snackbar,
     GithubCorner
   },
+  metaInfo: {
+    meta: [
+      {
+        vmid: "twitter_description",
+        name: "twitter:description",
+        content: "test"
+      }
+    ]
+  },
   data () {
     return {
       langMap: {
@@ -50,6 +59,7 @@ export default {
     },
     switchLang (lang) {
       this.$i18n.locale = this.langMap[lang.toLowerCase()] || "en";
+      this.updateMeta();
     },
     setLangUrl (lang) {
       const langParam = this.langMap[lang.toLowerCase()];
@@ -60,6 +70,20 @@ export default {
           query: { record: this.$route.query.record }
         });
       }
+    },
+    updateMeta () {
+      const title = this.$t("app.title");
+      const description = this.$t("app.description");
+
+      this.$meta().addApp("custom").set({
+        title,
+        meta: [
+          { property: "og:title", itemProp: "name", content: title },
+          { property: "og:site_name", itemProp: "author", content: title },
+          { name: "description", property: "og:description", itemProp: "description", content: description },
+          { name: "twitter:description", content: description },
+          { name: "twitter:title", content: title }]
+      });
     }
   },
   created () {
@@ -73,6 +97,7 @@ export default {
   },
   mounted () {
     this.$root.$snackbar = this.$refs.snackbar;
+    this.$root.updateMeta = this.updateMeta;
   }
 };
 </script>
