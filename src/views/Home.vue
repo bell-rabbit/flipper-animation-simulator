@@ -153,48 +153,18 @@ export default {
         this.isLock = true;
       }
     },
+    defaultRoll () {
+      if (this.createMode) {
+        this.$gtag.event("roll", { method: "Google", event_category: "Random" });
+        this.reloadRandom();
+      } else {
+        this.$gtag.event("record", { method: "Google", event_category: "Random" });
+        this.randomRecord();
+      }
+    },
     clickRoll () {
       this.loading = true;
-      if (this.isLock) {
-        switch (this.setting.star) {
-          case 1:
-            if (this.createMode) {
-              this.$gtag.event("roll", {
-                method: "Google",
-                event_category: "Random"
-              });
-              this.reloadRandom();
-            } else {
-              this.$gtag.event("record", {
-                method: "Google",
-                event_category: "Random"
-              });
-              this.randomRecord();
-            }
-            break;
-          case 3:
-            this.$gtag.event("record", {
-              method: "Google",
-              event_category: "star3"
-            });
-            this.getRecord(3);
-            break;
-          case 4:
-            this.$gtag.event("record", {
-              method: "Google",
-              event_category: "star4"
-            });
-            this.getRecord(4);
-            break;
-          case 5:
-            this.$gtag.event("record", {
-              method: "Google",
-              event_category: "star5"
-            });
-            this.getRecord(5);
-            break;
-        }
-      } else {
+      if (!this.isLock) {
         this.$gtag.event("bloodPressure", {
           method: "Google",
           event_category: "record"
@@ -211,6 +181,14 @@ export default {
           }
         });
       }
+
+      if (this.setting.star === 1) {
+        this.defaultRoll();
+        return;
+      }
+
+      this.$gtag.event("record", { method: "Google", event_category: `star${this.setting.star}` });
+      this.getRecord(this.setting.star);
     },
     randomRecord () {
       const number = this.getRandomInt(140000);
@@ -228,7 +206,7 @@ export default {
         .then((rs) => {
           if (rs.status === "empty") {
             return new Promise((resolve, reject) => {
-              reject();
+              reject(new Error("empty"));
             });
           } else {
             setTimeout(() => {
