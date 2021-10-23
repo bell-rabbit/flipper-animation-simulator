@@ -55,7 +55,10 @@
       "semi": ["error", "always"],
       "quotes": ["error", "double"],
       "complexity": ["error", 2],
-      "arrow-parens": ["error", "always"]
+      "arrow-parens": ["error", "always"],
+      "no-undefined": "error",
+      "no-console": ["warn", { "allow": ["warn", "error"] }],
+      "object-shorthand": "error"
     }
   },
   "browserslist": [
