@@ -1,0 +1,57 @@
+{
+  "app": {
+    "title": "彈珠跳台動畫模擬器 | 防止中風",
+    "nav": "彈珠跳台動畫模擬器",
+    "description": "一個模擬彈珠世界跳台動畫的網頁。包括隨機生成，必定3/4/5星及血壓測試模式。防止中風，腦溢血及高血壓。"
+  },
+  "message": {
+    "simulation_record": "呢嗰結果係網站第 <span style=\"color: #ffcd76\">{total}</span> 次模擬"
+  },
+  "setting": {
+    "t": "設定",
+    "random_record": "亂咁生成",
+    "specify_record": {
+      "3_star_ball": "一定3星",
+      "4_star_ball": "一定4星",
+      "5_star_ball": "一定5星"
+    }
+  },
+  "blood_pressure_test": {
+    "t": "血壓測試Mode"
+  },
+  "dialog": {
+    "yes": "係",
+    "no": "唔係"
+  },
+  "warning_message": {
+    "you_will_open_the_blood_pressure_test_mode": "你將會打開@:blood_pressure_test.t。",
+    "this_website_will_not_be_responsible_for_all_consequences": "本網頁對所有後果<span class=\"red--text\">唔會負責</span>，包括及唔限於以下反應：",
+    "example": "腦溢血，高血壓，中風..."
+  },
+  "share_url": {
+    "share": "share",
+    "copy": {
+      "success": "copy成功",
+      "error": "copy出咗問題"
+    },
+    "error": "出咗問題",
+    "share_a_record_to_you": "share咗個跳台動畫記錄比你",
+    "lets_simulate_the_jumping_animation": "模擬一下跳台動畫吧"
+  },
+  "button": {
+    "random": "亂咁生成",
+    "only_3_star_ball": "一定3星",
+    "only_4_star_ball": "一定4星",
+    "only_5_star_ball": "一定5星",
+    "blood_pressure": "血壓測試"
+  },
+  "language": {
+    "t": "語言",
+    "zh-tw": "繁體 (台灣)",
+    "zh-hk": "繁體 (香港)",
+    "en": "English",
+    "ja": "日文",
+    "ko": "한국어",
+    "help_message": "Click呢到改善嗰翻譯"
+  }
+}
