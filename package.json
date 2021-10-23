@@ -20,11 +20,16 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-eslint": "^4.5.14",
     "@vue/cli-plugin-router": "^4.5.13",
     "@vue/cli-service": "~4.5.0",
+    "@vue/eslint-config-standard": "^5.1.2",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^6.2.2",
     "sass": "~1.32.0",
     "sass-loader": "^10.0.0",
@@ -40,12 +45,18 @@
     },
     "extends": [
       "plugin:vue/essential",
-      "eslint:recommended"
+      "eslint:recommended",
+      "@vue/standard"
     ],
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {
+      "semi": ["error", "always"],
+      "quotes": ["error", "double"],
+      "complexity": ["error", 2],
+      "arrow-parens": ["error", "always"]
+    }
   },
   "browserslist": [
     "> 1%",
