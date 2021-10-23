@@ -26,15 +26,6 @@ export default {
     Snackbar,
     GithubCorner
   },
-  metaInfo: {
-    meta: [
-      {
-        vmid: "twitter_description",
-        name: "twitter:description",
-        content: "test"
-      }
-    ]
-  },
   data () {
     return {
       langMap: {
