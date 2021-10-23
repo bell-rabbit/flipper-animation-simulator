@@ -1,5 +1,5 @@
 <template>
-  <v-btn depressed height="55px" width="178px" @click="clickButton" :loading="loading" :style="getBackgroundImage()">
+  <v-btn depressed height="55px" width="178px" @click="clickButton" :loading="loading" :class="getBackgroundImage()">
     <template v-slot:loader>
       <v-progress-circular
         indeterminate
@@ -28,23 +28,17 @@ export default {
   },
   methods: {
     getBackgroundImage () {
-      let url = this.alert ? require("../assets/alertRoll.png") : require("../assets/roll.png");
+      const lang = this.$i18n.locale;
 
-      if (!this.alert) {
-        if (this.star !== 1) {
-          const roll3 = require("../assets/roll_3.png");
-          const roll4 = require("../assets/roll_4.png");
-          const roll5 = require("../assets/roll_5.png");
-
-          const images = [roll3, roll4, roll5];
-          url = images[this.star - 3];
-        }
+      if (this.alert) {
+        return `${lang}-alert`;
       }
 
-      return {
-        "background-image": `url(${url})`,
-        "background-size": "contain"
-      };
+      if (this.star === 1) {
+        return `${lang}-random`;
+      }
+
+      return `${lang}-star-${this.star}`;
     },
     clickButton () {
       this.$emit("click");
@@ -52,3 +46,51 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+@mixin bg {
+  background-image: url("../assets/split.png");
+}
+
+$zh-tw-y: -5.78px;
+$en-y: -67.2px;
+$ko-y: -128.4px;
+$zh-hk-y: -190.6px;
+
+$alert-x: -5.78px;
+$random-x: -189.56px;
+$star-5-x: -373.34px;
+$star-4-x: -557.12px;
+$star-3-x: -740.9px;
+
+$lang-list: ($zh-tw-y, $en-y, $ko-y, $zh-hk-y);
+$lang-name: ('zh-tw', 'en', 'ko', 'zh-hk');
+
+@for $i from 1 to length($lang-list) +1 {
+  .#{nth($lang-name, $i)}-alert {
+    background-position: $alert-x nth($lang-list, $i);
+    @include bg;
+  }
+
+  .#{nth($lang-name, $i)}-random {
+    background-position: $random-x nth($lang-list, $i);
+    @include bg;
+  }
+
+  .#{nth($lang-name, $i)}-star-5 {
+    background-position: $star-5-x nth($lang-list, $i);
+    @include bg;
+  }
+
+  .#{nth($lang-name, $i)}-star-4 {
+    background-position: $star-4-x nth($lang-list, $i);
+    @include bg;
+  }
+
+  .#{nth($lang-name, $i)}-star-3 {
+    background-position: $star-3-x nth($lang-list, $i);
+    @include bg;
+  }
+}
+
+</style>
