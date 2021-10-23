@@ -31,13 +31,13 @@
 
 <script>
 export default {
-  name: 'Snackbar',
+  name: "Snackbar",
   data () {
     return {
       show: false,
-      text: '',
-      color: ['grey darken-3', '', 'red lighten-5'],
-      action: '',
+      text: "",
+      color: ["grey darken-3", "", "red lighten-5"],
+      action: "",
       callback: null
     };
   },
@@ -46,18 +46,18 @@ export default {
       this.show = false;
       this.callback();
     },
-    Show (text, type = 'message', option) {
+    Show (text, type = "message", option) {
       this.text = text;
       this.show = true;
       switch (type) {
-        case 'message':
-          this.color = ['info', 'cyan lighten-1', 'red lighten-5'];
-          this.action = '';
+        case "message":
+          this.color = ["info", "cyan lighten-1", "red lighten-5"];
+          this.action = "";
           this.callback = undefined;
           break;
-        case 'error':
-          this.color = ['error', 'green darken-4', 'red lighten-5'];
-          this.text = `Error: ${  this.text}`;
+        case "error":
+          this.color = ["error", "green darken-4", "red lighten-5"];
+          this.text = `Error: ${this.text}`;
           if (option) {
             this.action = option.text ? option.text : undefined;
             this.callback = option.callback ? option.callback : undefined;

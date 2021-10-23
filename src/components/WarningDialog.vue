@@ -49,20 +49,20 @@
 
 <script>
 export default {
-  name: 'WarningDialog',
+  name: "WarningDialog",
   props: {
     value: {
       type: Boolean,
       default: false
-    },
+    }
   },
   computed: {
     show: {
       get () {
-        return this.value
+        return this.value;
       },
       set (value) {
-        this.$emit('input', value)
+        this.$emit("input", value);
       }
     }
   }

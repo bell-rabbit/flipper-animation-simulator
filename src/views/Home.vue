@@ -35,7 +35,7 @@
                 ID: {{ currentId }}
           </span>
         </v-col>
-        <v-col  cols="4" class="pt-2 pb-0 pr-0 pl-0 text-center">
+        <v-col cols="4" class="pt-2 pb-0 pr-0 pl-0 text-center">
           <span class="pt-2 pb-0 pr-0 pl-0 text-center">
            <span style="color: #ffcd76">{{ bloodPressure.list.length }}</span> /{{ bloodPressure.count }}
           </span>
@@ -61,22 +61,22 @@
       </v-row>
     </v-container>
 
-    <warning-dialog v-model="dialog.alert" @agree="agree" />
-    <setting-card v-model="dialog.setting" :star.sync="setting.star" />
+    <warning-dialog v-model="dialog.alert" @agree="agree"/>
+    <setting-card v-model="dialog.setting" :star.sync="setting.star"/>
     <share-url v-model="dialog.share" :current-id="currentId"/>
   </v-card>
 </template>
 
 <script>
-import flipperAnimationGenerator from '@bell-rabbit/flipper-animation-generator';
-import RollButton from '../components/RollButton';
-import ShareUrl from '../components/ShareUrl';
-import API from '../plugins/api';
-import SettingCard from '../components/SettingCard';
-import WarningDialog from '../components/WarningDialog';
+import flipperAnimationGenerator from "@bell-rabbit/flipper-animation-generator";
+import RollButton from "../components/RollButton";
+import ShareUrl from "../components/ShareUrl";
+import API from "../plugins/api";
+import SettingCard from "../components/SettingCard";
+import WarningDialog from "../components/WarningDialog";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     WarningDialog,
     SettingCard,
@@ -88,11 +88,18 @@ export default {
     return {
       flipperJSON: {},
       isLock: true,
-      dialog: { alert: false, setting: false, share: false },
+      dialog: {
+        alert: false,
+        setting: false,
+        share: false
+      },
       setting: { star: 1 },
       total: 0,
       playback: false,
-      bloodPressure: { count: 0, list: [] },
+      bloodPressure: {
+        count: 0,
+        list: []
+      },
       currentId: 0,
       loading: false,
       createMode: false
@@ -100,13 +107,13 @@ export default {
   },
   methods: {
     getWidth () {
-      let maxHeight = this.$vuetify.breakpoint.height - 148;
+      const maxHeight = this.$vuetify.breakpoint.height - 148;
 
       if (maxHeight > 896) {
         return 450;
       }
 
-      let maxWidth = maxHeight * 0.558;
+      const maxWidth = maxHeight * 0.558;
 
       if (this.$vuetify.breakpoint.width < maxWidth) {
         return this.$vuetify.breakpoint.width;
@@ -117,7 +124,7 @@ export default {
     saveRecord (data) {
       this.loading = false;
       API.save(data).then((rs) => {
-        if (rs.status === 'success') {
+        if (rs.status === "success") {
           this.total = rs.id;
           this.currentId = parseInt(rs.id);
         }
@@ -153,34 +160,52 @@ export default {
         switch (this.setting.star) {
           case 1:
             if (this.createMode) {
-              this.$gtag.event('roll', { method: 'Google', 'event_category': 'Random' });
+              this.$gtag.event("roll", {
+                method: "Google",
+                event_category: "Random"
+              });
               this.reloadRandom();
             } else {
-              this.$gtag.event('record', { method: 'Google', 'event_category': 'Random' });
+              this.$gtag.event("record", {
+                method: "Google",
+                event_category: "Random"
+              });
               this.randomRecord();
             }
             break;
           case 3:
-            this.$gtag.event('record', { method: 'Google', 'event_category': 'star3' });
+            this.$gtag.event("record", {
+              method: "Google",
+              event_category: "star3"
+            });
             this.getRecord(3);
             break;
           case 4:
-            this.$gtag.event('record', { method: 'Google', 'event_category': 'star4' });
+            this.$gtag.event("record", {
+              method: "Google",
+              event_category: "star4"
+            });
             this.getRecord(4);
             break;
           case 5:
-            this.$gtag.event('record', { method: 'Google', 'event_category': 'star5' });
+            this.$gtag.event("record", {
+              method: "Google",
+              event_category: "star5"
+            });
             this.getRecord(5);
             break;
         }
       } else {
-        this.$gtag.event('bloodPressure', { method: 'Google', 'event_category': 'record' });
+        this.$gtag.event("bloodPressure", {
+          method: "Google",
+          event_category: "record"
+        });
         API.bloodPressureRecord().then((rs) => {
           this.playback = true;
           this.currentId = parseInt(rs.id);
           this.flipperJSON = JSON.parse(rs.data);
 
-          let inList = this.bloodPressure.list.filter(i => i === rs.id);
+          const inList = this.bloodPressure.list.filter((i) => i === rs.id);
 
           if (inList.length < 1) {
             this.bloodPressure.list.push(rs.id);
@@ -189,30 +214,30 @@ export default {
       }
     },
     randomRecord () {
-      let number = this.getRandomInt(140000);
+      const number = this.getRandomInt(140000);
       this.currentId = number;
       this.playRecord(number, 0)
-          .catch(() => {
-            this.randomRecord();
-          });
+        .catch(() => {
+          this.randomRecord();
+        });
     },
     getRandomInt (max) {
       return Math.floor(Math.random() * max);
     },
     playRecord (recordId, timeout) {
       return API.getRecord(recordId)
-          .then((rs) => {
-            if (rs.status === 'empty') {
-              return new Promise((resolve, reject) => {
-                reject();
-              });
-            } else {
-              setTimeout(() => {
-                this.playback = true;
-                this.flipperJSON = JSON.parse(rs.data);
-              }, timeout);
-            }
-          });
+        .then((rs) => {
+          if (rs.status === "empty") {
+            return new Promise((resolve, reject) => {
+              reject();
+            });
+          } else {
+            setTimeout(() => {
+              this.playback = true;
+              this.flipperJSON = JSON.parse(rs.data);
+            }, timeout);
+          }
+        });
     },
     getRecord (star) {
       API.randomRecord(star).then((rs) => {
@@ -229,10 +254,10 @@ export default {
     },
     getBackgroundImage () {
       return {
-        'background-image': `url(${require('../assets/bottom.jpg')})`,
-        'background-repeat': 'no-repeat',
-        'background-size': 'cover',
-        'background-position': 'bottom'
+        "background-image": `url(${require("../assets/bottom.jpg")})`,
+        "background-repeat": "no-repeat",
+        "background-size": "cover",
+        "background-position": "bottom"
       };
     },
     openSetting () {
@@ -250,7 +275,10 @@ export default {
   mounted () {
     if (this.$route.query.record) {
       this.currentId = this.$route.query.record;
-      this.$gtag.event('record', { method: 'Google', 'event_category': 'url' });
+      this.$gtag.event("record", {
+        method: "Google",
+        event_category: "url"
+      });
       this.playRecord(this.$route.query.record, 1000);
     }
   }

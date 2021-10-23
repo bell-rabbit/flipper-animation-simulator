@@ -47,16 +47,16 @@
 </template>
 
 <script>
-import FlipperCard from './FlipperCard';
+import FlipperCard from "./FlipperCard";
 export default {
-  name: 'SettingCard',
+  name: "SettingCard",
   components: { FlipperCard },
   props: {
     value: {
       type: Boolean,
       default: false
     },
-    star:{
+    star: {
       type: Number,
       default: 1
     }
@@ -64,29 +64,29 @@ export default {
   computed: {
     show: {
       get () {
-        return this.value
+        return this.value;
       },
       set (value) {
-        this.$emit('input', value)
+        this.$emit("input", value);
       }
     },
-    starSetting:{
-      get(){
-        return this.star
+    starSetting: {
+      get () {
+        return this.star;
       },
       set (value) {
         console.log(value);
-        this.$emit('update:star', value)
+        this.$emit("update:star", value);
       }
     }
   },
   data () {
     return {
       language: [
-        { text: this.$tc('language.zh-tw'), value: 'zh-tw' }
+        { text: this.$tc("language.zh-tw"), value: "zh-tw" }
       ],
-      selectLanguage: { text: this.$tc('language.zh-tw'), value: 'zh-tw' }
+      selectLanguage: { text: this.$tc("language.zh-tw"), value: "zh-tw" }
     };
-  },
+  }
 };
 </script>

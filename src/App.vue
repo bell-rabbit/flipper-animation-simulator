@@ -17,21 +17,21 @@
 </template>
 
 <script>
-import GithubCorner from './components/GithubCorner';
-import Snackbar from './components/Snackbar';
+import GithubCorner from "./components/GithubCorner";
+import Snackbar from "./components/Snackbar";
 export default {
-  name: 'App',
+  name: "App",
   components: { Snackbar, GithubCorner },
   methods: {
     getBackgroundImage () {
       return {
-        'background-image': `url(${require('./assets/bg.jpg')})`,
-        'background-size': '40px'
+        "background-image": `url(${require("./assets/bg.jpg")})`,
+        "background-size": "40px"
       };
     }
   },
   mounted () {
     this.$root.$snackbar = this.$refs.snackbar;
-  },
+  }
 };
 </script>
