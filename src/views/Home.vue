@@ -180,6 +180,7 @@ export default {
             this.bloodPressure.list.push(rs.id);
           }
         });
+        return;
       }
 
       if (this.setting.star === 1) {
