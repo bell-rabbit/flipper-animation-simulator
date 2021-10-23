@@ -61,99 +61,8 @@
       </v-row>
     </v-container>
 
-    <v-dialog
-        v-model="dialog.alert"
-        persistent
-        max-width="500"
-        class="subtitle-2"
-    >
-      <v-card>
-        <v-card-text align="center" class="mb-0 pb-2 pt-12 pl-4 pr-4" style="font-size: 18px;">
-          {{ $t('warning_message.you_will_open_the_blood_pressure_test_mode') }}
-        </v-card-text>
-        <v-card-text align="center" class="mb-0 pb-3 pl-4 pr-4" style="font-size: 18px;"
-                     v-html="$t('warning_message.this_website_will_not_be_responsible_for_all_consequences')">
-        </v-card-text>
-        <v-card-text align="center" class="pl-4 pr-4" style="font-size: 18px;">
-          <br/>
-          {{ $t('warning_message.example') }}
-        </v-card-text>
-        <v-card-text class="pb-0 pl-4 pr-4">
-          <v-divider/>
-        </v-card-text>
-        <v-card-actions>
-          <v-row class="pa-0 ma-0">
-            <v-col cols="6" class="pl-0">
-              <v-btn
-                  color="#ea3653"
-                  @click="dialog.alert = false"
-                  class="white--text"
-                  block
-              >
-                {{ $t('dialog.no') }}
-              </v-btn>
-            </v-col>
-            <v-col cols="6" class="pr-0">
-              <v-btn
-                  color="#2ec5b6"
-                  @click="agree"
-                  class="white--text"
-                  block
-              >
-                {{ $t('dialog.yes') }}
-              </v-btn>
-            </v-col>
-          </v-row>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-
-    <div class="text-center">
-      <v-bottom-sheet inset v-model="dialog.setting" max-width="450">
-        <flipper-card :title="$t('setting.t')" v-model="dialog.setting">
-          <v-select
-              :items="language"
-              v-model="selectLanguage"
-              item-text="text"
-              item-value="value"
-              :label="$t('language.t')"
-          ></v-select>
-
-          <a href="https://poeditor.com/join/project?hash=TdCGQW1xiz" style="color: #ff9f1c" target="_blank">Click here
-            to improve the language resource file.</a>
-
-          <v-checkbox
-              v-model="setting.star"
-              :label="$t('setting.random_record')"
-              color="#ff9f1c"
-              :value="1"
-              hide-details
-          ></v-checkbox>
-          <v-checkbox
-              v-model="setting.star"
-              :label="$t('setting.specify_record.3_star_ball')"
-              color="#ff9f1c"
-              :value="3"
-              hide-details
-          ></v-checkbox>
-          <v-checkbox
-              v-model="setting.star"
-              :label="$t('setting.specify_record.4_star_ball')"
-              color="#ff9f1c"
-              :value="4"
-              hide-details
-          ></v-checkbox>
-          <v-checkbox
-              v-model="setting.star"
-              :label="$t('setting.specify_record.5_star_ball')"
-              color="#ff9f1c"
-              :value="5"
-              hide-details
-          ></v-checkbox>
-        </flipper-card>
-      </v-bottom-sheet>
-    </div>
-
+    <warning-dialog v-model="dialog.alert" @agree="agree" />
+    <setting-card v-model="dialog.setting" :star.sync="setting.star" />
     <share-url v-model="dialog.share" :current-id="currentId"/>
   </v-card>
 </template>
@@ -161,15 +70,17 @@
 <script>
 import flipperAnimationGenerator from '@bell-rabbit/flipper-animation-generator';
 import RollButton from '../components/RollButton';
-import FlipperCard from '../components/FlipperCard';
 import ShareUrl from '../components/ShareUrl';
 import API from '../plugins/api';
+import SettingCard from '../components/SettingCard';
+import WarningDialog from '../components/WarningDialog';
 
 export default {
   name: 'Home',
   components: {
+    WarningDialog,
+    SettingCard,
     ShareUrl,
-    FlipperCard,
     RollButton,
     flipperAnimationGenerator
   },
@@ -184,11 +95,7 @@ export default {
       bloodPressure: { count: 0, list: [] },
       currentId: 0,
       loading: false,
-      createMode: false,
-      language: [
-        { text: this.$tc('language.zh-tw'), value: 'zh-tw' }
-      ],
-      selectLanguage: { text: this.$tc('language.zh-tw'), value: 'zh-tw' }
+      createMode: false
     };
   },
   methods: {
