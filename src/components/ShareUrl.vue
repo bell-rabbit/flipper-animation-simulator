@@ -36,10 +36,10 @@
 </template>
 
 <script>
-import FlipperCard from './FlipperCard';
+import FlipperCard from "./FlipperCard";
 
 export default {
-  name: 'ShareUrl',
+  name: "ShareUrl",
   components: { FlipperCard },
   props: {
     value: {
@@ -54,21 +54,21 @@ export default {
   data () {
     return {
       dialog: this.value,
-      shareUrl: '',
+      shareUrl: "",
       canShare: false
     };
   },
   methods: {
     onCopy () {
-      this.$root.$snackbar.Show(this.$tc('share_url.copy.success'));
+      this.$root.$snackbar.show(this.$tc("share_url.copy.success"));
     },
     onError () {
-      this.$root.$snackbar.Show(this.$tc('share_url.copy.error'), this.$tc('share_url.error'));
+      this.$root.$snackbar.show(this.$tc("share_url.copy.error"), this.$tc("share_url.error"));
     },
     share () {
       navigator.share({
-        text: this.currentId === 0 ? this.$tc('share_url.lets_simulate_the_jumping_animation') : this.$tc('share_url.share_a_record_to_you'),
-        title: this.$tc('app.nav'),
+        text: this.currentId === 0 ? this.$tc("share_url.lets_simulate_the_jumping_animation") : this.$tc("share_url.share_a_record_to_you"),
+        title: this.$tc("app.nav"),
         url: this.shareUrl
       });
     }
@@ -80,7 +80,7 @@ export default {
   },
   watch: {
     dialog (newValue) {
-      this.$emit('input', newValue);
+      this.$emit("input", newValue);
     },
     value (newValue) {
       if (this.currentId) {
@@ -93,4 +93,3 @@ export default {
   }
 };
 </script>
-

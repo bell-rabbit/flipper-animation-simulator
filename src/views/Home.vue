@@ -35,7 +35,7 @@
                 ID: {{ currentId }}
           </span>
         </v-col>
-        <v-col  cols="4" class="pt-2 pb-0 pr-0 pl-0 text-center">
+        <v-col cols="4" class="pt-2 pb-0 pr-0 pl-0 text-center">
           <span class="pt-2 pb-0 pr-0 pl-0 text-center">
            <span style="color: #ffcd76">{{ bloodPressure.list.length }}</span> /{{ bloodPressure.count }}
           </span>
@@ -61,115 +61,26 @@
       </v-row>
     </v-container>
 
-    <v-dialog
-        v-model="dialog.alert"
-        persistent
-        max-width="500"
-        class="subtitle-2"
-    >
-      <v-card>
-        <v-card-text align="center" class="mb-0 pb-2 pt-12 pl-4 pr-4" style="font-size: 18px;">
-          {{ $t('warning_message.you_will_open_the_blood_pressure_test_mode') }}
-        </v-card-text>
-        <v-card-text align="center" class="mb-0 pb-3 pl-4 pr-4" style="font-size: 18px;"
-                     v-html="$t('warning_message.this_website_will_not_be_responsible_for_all_consequences')">
-        </v-card-text>
-        <v-card-text align="center" class="pl-4 pr-4" style="font-size: 18px;">
-          <br/>
-          {{ $t('warning_message.example') }}
-        </v-card-text>
-        <v-card-text class="pb-0 pl-4 pr-4">
-          <v-divider/>
-        </v-card-text>
-        <v-card-actions>
-          <v-row class="pa-0 ma-0">
-            <v-col cols="6" class="pl-0">
-              <v-btn
-                  color="#ea3653"
-                  @click="dialog.alert = false"
-                  class="white--text"
-                  block
-              >
-                {{ $t('dialog.no') }}
-              </v-btn>
-            </v-col>
-            <v-col cols="6" class="pr-0">
-              <v-btn
-                  color="#2ec5b6"
-                  @click="agree"
-                  class="white--text"
-                  block
-              >
-                {{ $t('dialog.yes') }}
-              </v-btn>
-            </v-col>
-          </v-row>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-
-    <div class="text-center">
-      <v-bottom-sheet inset v-model="dialog.setting" max-width="450">
-        <flipper-card :title="$t('setting.t')" v-model="dialog.setting">
-          <v-select
-              :items="language"
-              v-model="selectLanguage"
-              item-text="text"
-              item-value="value"
-              :label="$t('language.t')"
-          ></v-select>
-
-          <a href="https://poeditor.com/join/project?hash=TdCGQW1xiz" style="color: #ff9f1c" target="_blank">Click here
-            to improve the language resource file.</a>
-
-          <v-checkbox
-              v-model="setting.star"
-              :label="$t('setting.random_record')"
-              color="#ff9f1c"
-              :value="1"
-              hide-details
-          ></v-checkbox>
-          <v-checkbox
-              v-model="setting.star"
-              :label="$t('setting.specify_record.3_star_ball')"
-              color="#ff9f1c"
-              :value="3"
-              hide-details
-          ></v-checkbox>
-          <v-checkbox
-              v-model="setting.star"
-              :label="$t('setting.specify_record.4_star_ball')"
-              color="#ff9f1c"
-              :value="4"
-              hide-details
-          ></v-checkbox>
-          <v-checkbox
-              v-model="setting.star"
-              :label="$t('setting.specify_record.5_star_ball')"
-              color="#ff9f1c"
-              :value="5"
-              hide-details
-          ></v-checkbox>
-        </flipper-card>
-      </v-bottom-sheet>
-    </div>
-
+    <warning-dialog v-model="dialog.alert" @agree="agree"/>
+    <setting-card v-model="dialog.setting" :star.sync="setting.star"/>
     <share-url v-model="dialog.share" :current-id="currentId"/>
   </v-card>
 </template>
 
 <script>
-import flipperAnimationGenerator from '@bell-rabbit/flipper-animation-generator';
-import RollButton from '../components/RollButton';
-import FlipperCard from '../components/FlipperCard';
-import ShareUrl from '../components/ShareUrl';
-import API from '../plugins/api';
+import flipperAnimationGenerator from "@bell-rabbit/flipper-animation-generator";
+import RollButton from "../components/RollButton";
+import ShareUrl from "../components/ShareUrl";
+import API from "../plugins/api";
+import SettingCard from "../components/SettingCard";
+import WarningDialog from "../components/WarningDialog";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
+    WarningDialog,
+    SettingCard,
     ShareUrl,
-    FlipperCard,
     RollButton,
     flipperAnimationGenerator
   },
@@ -177,29 +88,32 @@ export default {
     return {
       flipperJSON: {},
       isLock: true,
-      dialog: { alert: false, setting: false, share: false },
+      dialog: {
+        alert: false,
+        setting: false,
+        share: false
+      },
       setting: { star: 1 },
       total: 0,
       playback: false,
-      bloodPressure: { count: 0, list: [] },
+      bloodPressure: {
+        count: 0,
+        list: []
+      },
       currentId: 0,
       loading: false,
-      createMode: false,
-      language: [
-        { text: this.$tc('language.zh-tw'), value: 'zh-tw' }
-      ],
-      selectLanguage: { text: this.$tc('language.zh-tw'), value: 'zh-tw' }
+      createMode: false
     };
   },
   methods: {
     getWidth () {
-      let maxHeight = this.$vuetify.breakpoint.height - 148;
+      const maxHeight = this.$vuetify.breakpoint.height - 148;
 
       if (maxHeight > 896) {
         return 450;
       }
 
-      let maxWidth = maxHeight * 0.558;
+      const maxWidth = maxHeight * 0.558;
 
       if (this.$vuetify.breakpoint.width < maxWidth) {
         return this.$vuetify.breakpoint.width;
@@ -210,7 +124,7 @@ export default {
     saveRecord (data) {
       this.loading = false;
       API.save(data).then((rs) => {
-        if (rs.status === 'success') {
+        if (rs.status === "success") {
           this.total = rs.id;
           this.currentId = parseInt(rs.id);
         }
@@ -220,7 +134,6 @@ export default {
       this.loading = false;
     },
     shareUrl () {
-      console.log(this.dialog.share);
       this.dialog.share = true;
     },
     agree () {
@@ -240,72 +153,68 @@ export default {
         this.isLock = true;
       }
     },
+    defaultRoll () {
+      if (this.createMode) {
+        this.$gtag.event("roll", { method: "Google", event_category: "Random" });
+        this.reloadRandom();
+      } else {
+        this.$gtag.event("record", { method: "Google", event_category: "Random" });
+        this.randomRecord();
+      }
+    },
     clickRoll () {
       this.loading = true;
-      if (this.isLock) {
-        switch (this.setting.star) {
-          case 1:
-            if (this.createMode) {
-              this.$gtag.event('roll', { method: 'Google', 'event_category': 'Random' });
-              this.reloadRandom();
-            } else {
-              this.$gtag.event('record', { method: 'Google', 'event_category': 'Random' });
-              this.randomRecord();
-            }
-            break;
-          case 3:
-            this.$gtag.event('record', { method: 'Google', 'event_category': 'star3' });
-            this.getRecord(3);
-            break;
-          case 4:
-            this.$gtag.event('record', { method: 'Google', 'event_category': 'star4' });
-            this.getRecord(4);
-            break;
-          case 5:
-            this.$gtag.event('record', { method: 'Google', 'event_category': 'star5' });
-            this.getRecord(5);
-            break;
-        }
-      } else {
-        this.$gtag.event('bloodPressure', { method: 'Google', 'event_category': 'record' });
+      if (!this.isLock) {
+        this.$gtag.event("bloodPressure", {
+          method: "Google",
+          event_category: "record"
+        });
         API.bloodPressureRecord().then((rs) => {
           this.playback = true;
           this.currentId = parseInt(rs.id);
           this.flipperJSON = JSON.parse(rs.data);
 
-          let inList = this.bloodPressure.list.filter(i => i === rs.id);
+          const inList = this.bloodPressure.list.filter((i) => i === rs.id);
 
           if (inList.length < 1) {
             this.bloodPressure.list.push(rs.id);
           }
         });
       }
+
+      if (this.setting.star === 1) {
+        this.defaultRoll();
+        return;
+      }
+
+      this.$gtag.event("record", { method: "Google", event_category: `star${this.setting.star}` });
+      this.getRecord(this.setting.star);
     },
     randomRecord () {
-      let number = this.getRandomInt(140000);
+      const number = this.getRandomInt(140000);
       this.currentId = number;
       this.playRecord(number, 0)
-          .catch(() => {
-            this.randomRecord();
-          });
+        .catch(() => {
+          this.randomRecord();
+        });
     },
     getRandomInt (max) {
       return Math.floor(Math.random() * max);
     },
     playRecord (recordId, timeout) {
       return API.getRecord(recordId)
-          .then((rs) => {
-            if (rs.status === 'empty') {
-              return new Promise((resolve, reject) => {
-                reject();
-              });
-            } else {
-              setTimeout(() => {
-                this.playback = true;
-                this.flipperJSON = JSON.parse(rs.data);
-              }, timeout);
-            }
-          });
+        .then((rs) => {
+          if (rs.status === "empty") {
+            return new Promise((resolve, reject) => {
+              reject(new Error("empty"));
+            });
+          } else {
+            setTimeout(() => {
+              this.playback = true;
+              this.flipperJSON = JSON.parse(rs.data);
+            }, timeout);
+          }
+        });
     },
     getRecord (star) {
       API.randomRecord(star).then((rs) => {
@@ -322,10 +231,10 @@ export default {
     },
     getBackgroundImage () {
       return {
-        'background-image': `url(${require('../assets/bottom.jpg')})`,
-        'background-repeat': 'no-repeat',
-        'background-size': 'cover',
-        'background-position': 'bottom'
+        "background-image": `url(${require("../assets/bottom.jpg")})`,
+        "background-repeat": "no-repeat",
+        "background-size": "cover",
+        "background-position": "bottom"
       };
     },
     openSetting () {
@@ -343,7 +252,10 @@ export default {
   mounted () {
     if (this.$route.query.record) {
       this.currentId = this.$route.query.record;
-      this.$gtag.event('record', { method: 'Google', 'event_category': 'url' });
+      this.$gtag.event("record", {
+        method: "Google",
+        event_category: "url"
+      });
       this.playRecord(this.$route.query.record, 1000);
     }
   }

@@ -3,6 +3,7 @@
 ![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/m789451157-78f49e0cce471d85607d06d9?style=for-the-badge)
 [![License](https://img.shields.io/github/license/bell-rabbit/flipper-animation-simulator?style=for-the-badge)](/LICENSE)
 ![GitHub issues](https://img.shields.io/github/issues/bell-rabbit/flipper-animation-simulator?style=for-the-badge)
+[![Codacy Badge](https://img.shields.io/codacy/grade/1d05125ca0224fb0953c35d74d4274af?style=for-the-badge)](https://www.codacy.com/gh/bell-rabbit/flipper-animation-simulator/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=bell-rabbit/flipper-animation-simulator&amp;utm_campaign=Badge_Grade)
 
 <br />
 <div align="center">

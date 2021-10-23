@@ -1,15 +1,15 @@
 module.exports = {
   transpileDependencies: [
-    'vuetify'
+    "vuetify"
   ],
 
   devServer: {
     proxy: {
       "/api": {
         target: "http://localhost:80",
-        pathRewrite: { "^/api": "" },
-      },
-    },
+        pathRewrite: { "^/api": "" }
+      }
+    }
   },
   pluginOptions: {
     i18n: {
@@ -20,4 +20,4 @@ module.exports = {
       enableBridge: false
     }
   }
-}
+};

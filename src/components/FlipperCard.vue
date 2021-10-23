@@ -24,13 +24,13 @@
 
 <script>
 export default {
-  name: 'FlipperCard',
+  name: "FlipperCard",
   props: {
     title: {
       type: String,
-      default: ''
-    },
-  },
+      default: ""
+    }
+  }
 };
 </script>
 

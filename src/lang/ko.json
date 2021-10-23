@@ -1,0 +1,57 @@
+{
+  "app": {
+    "title": "플리퍼 애니메이션 시뮬레이터 | 뇌졸중 방지",
+    "nav": "플리퍼 애니메이션 시뮬레이터",
+    "description": "플리퍼 애니메이션 시뮬레이터 시뮬레이션하는 웹페이지. 무작위 생성, 특정 3/4/5 별 및 혈압 테스트 모드를 포함합니다. 뇌졸중, 뇌출혈 및 고혈압을 예방하십시오."
+  },
+  "message": {
+    "simulation_record": "이 결과는 이 사이트의 <span style=\"color: #ffcd76\">{total}</span> 시뮬레이션입니다."
+  },
+  "setting": {
+    "t": "설정",
+    "random_record": "랜덤",
+    "specify_record": {
+      "3_star_ball": "3성만",
+      "4_star_ball": "4성만",
+      "5_star_ball": "5성만"
+    }
+  },
+  "blood_pressure_test": {
+    "t": "혈압 측정 모드"
+  },
+  "dialog": {
+    "yes": "네",
+    "no": "아니오"
+  },
+  "warning_message": {
+    "you_will_open_the_blood_pressure_test_mode": "해당 모드를 활성화합니다 | @:blood_pressure_test.t。",
+    "this_website_will_not_be_responsible_for_all_consequences": "본 사이트는 모든 결과에 대해 <span class=\"red--text\">책임을 지지 않으며</span>, 아래의 반응을 유발할 수 있습니다：",
+    "example": "뇌출혈, 고혈압, 뇌졸중..."
+  },
+  "share_url": {
+    "share": "공유",
+    "copy": {
+      "success": "복사됨",
+      "error": "복사 실패"
+    },
+    "error": "에러 발생",
+    "share_a_record_to_you": "당신에게 점프대 애니메이션 기록을 한 번 공유했습니다!",
+    "lets_simulate_the_jumping_animation": "점프대 애니메이션을 시뮬레이션해보자!!"
+  },
+  "button": {
+    "random": "랜덤",
+    "only_3_star_ball": "3성만",
+    "only_4_star_ball": "4성만",
+    "only_5_star_ball": "5성만",
+    "blood_pressure": "고혈압"
+  },
+  "language": {
+    "t": "언어",
+    "zh-tw": "번체 (대만)",
+    "zh-hk": "번체 (홍콩)",
+    "en": "영어",
+    "ja": "일본어",
+    "ko": "한국어",
+    "help_message": "언어 리소스 파일을 개선하려면 여기를 클릭하십시오."
+  }
+}
