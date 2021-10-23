@@ -53,14 +53,14 @@ export default {
         case "message":
           this.color = ["info", "cyan lighten-1", "red lighten-5"];
           this.action = "";
-          this.callback = undefined;
+          this.callback = null;
           break;
         case "error":
           this.color = ["error", "green darken-4", "red lighten-5"];
           this.text = `Error: ${this.text}`;
           if (option) {
-            this.action = option.text ? option.text : undefined;
-            this.callback = option.callback ? option.callback : undefined;
+            this.action = option.text ? option.text : null;
+            this.callback = option.callback ? option.callback : null;
           }
           break;
       }
