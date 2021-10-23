@@ -54,11 +54,13 @@
     "rules": {
       "semi": ["error", "always"],
       "quotes": ["error", "double"],
-      "complexity": ["error", 2],
+      "complexity": ["error", 4],
       "arrow-parens": ["error", "always"],
       "no-undefined": "error",
       "no-console": ["warn", { "allow": ["warn", "error"] }],
-      "object-shorthand": "error"
+      "object-shorthand": "error",
+      "camelcase": "error",
+      "new-cap": ["error", { "newIsCap": true }]
     }
   },
   "browserslist": [
