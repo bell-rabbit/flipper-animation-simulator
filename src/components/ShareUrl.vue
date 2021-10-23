@@ -83,10 +83,15 @@ export default {
       this.$emit("input", newValue);
     },
     value (newValue) {
+      let lang = this.$i18n.locale;
+      if (lang === "zh-tw") {
+        lang = "";
+      }
+
       if (this.currentId) {
-        this.shareUrl = `${window.location.origin}?record=${this.currentId}`;
+        this.shareUrl = `${window.location.origin}/${lang}?record=${this.currentId}`;
       } else {
-        this.shareUrl = `${window.location.origin}`;
+        this.shareUrl = `${window.location.origin}/${lang}`;
       }
       this.dialog = newValue;
     }
