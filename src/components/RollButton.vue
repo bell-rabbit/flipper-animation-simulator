@@ -32,7 +32,12 @@ export default {
 
       if (!this.alert) {
         if (this.star !== 1) {
-          url = require(`../assets/roll_${this.star}.png`);
+          const roll3 = require("../assets/roll_3.png");
+          const roll4 = require("../assets/roll_4.png");
+          const roll5 = require("../assets/roll_5.png");
+
+          const images = [roll3, roll4, roll5];
+          url = images[this.star - 3];
         }
       }
 
