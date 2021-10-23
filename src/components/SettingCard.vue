@@ -10,8 +10,7 @@
             :label="$t('language.t')"
         ></v-select>
 
-        <a href="https://poeditor.com/join/project?hash=TdCGQW1xiz" style="color: #ff9f1c" target="_blank">Click here
-          to improve the language resource file.</a>
+        <a href="https://poeditor.com/join/project?hash=TdCGQW1xiz" style="color: #ff9f1c" target="_blank" >{{$t('language.help_message')}}</a>
 
         <v-checkbox
             v-model="starSetting"
@@ -82,10 +81,19 @@ export default {
   data () {
     return {
       language: [
-        { text: this.$tc("language.zh-tw"), value: "zh-tw" }
+        { text: this.$tc("language.zh-tw"), value: "zh-tw" },
+        { text: this.$tc("language.zh-hk"), value: "zh-hk" },
+        { text: this.$tc("language.en"), value: "en" },
+        { text: this.$tc("language.ko"), value: "ko" }
       ],
-      selectLanguage: { text: this.$tc("language.zh-tw"), value: "zh-tw" }
+      selectLanguage: this.$i18n.locale
     };
+  },
+  watch: {
+    selectLanguage (newValue) {
+      this.$root.$i18n.locale = newValue;
+      this.$root.updateMeta();
+    }
   }
 };
 </script>

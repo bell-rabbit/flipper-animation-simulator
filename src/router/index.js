@@ -5,7 +5,7 @@ import Home from "../views/Home.vue";
 Vue.use(VueRouter);
 
 const routes = [
-  { path: "/", name: "Home", component: Home },
+  { path: "/:lang", name: "Home", component: Home },
   { path: "*", redirect: { name: "Home" } }
 ];
 

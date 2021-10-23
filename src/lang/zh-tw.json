@@ -49,9 +49,9 @@
     "t": "語言",
     "zh-tw": "繁體 (台灣)",
     "zh-hk": "繁體 (香港)",
-    "en": "英語",
+    "en": "English",
     "ja": "日文",
-    "ko": "韓文",
-    "help_message": ""
+    "ko": "한국어",
+    "help_message": "Click here to improve the language resource file."
   }
 }

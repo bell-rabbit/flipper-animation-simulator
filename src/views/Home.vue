@@ -155,10 +155,16 @@ export default {
     },
     defaultRoll () {
       if (this.createMode) {
-        this.$gtag.event("roll", { method: "Google", event_category: "Random" });
+        this.$gtag.event("roll", {
+          method: "Google",
+          event_category: "Random"
+        });
         this.reloadRandom();
       } else {
-        this.$gtag.event("record", { method: "Google", event_category: "Random" });
+        this.$gtag.event("record", {
+          method: "Google",
+          event_category: "Random"
+        });
         this.randomRecord();
       }
     },
@@ -180,6 +186,7 @@ export default {
             this.bloodPressure.list.push(rs.id);
           }
         });
+        return;
       }
 
       if (this.setting.star === 1) {
@@ -187,7 +194,10 @@ export default {
         return;
       }
 
-      this.$gtag.event("record", { method: "Google", event_category: `star${this.setting.star}` });
+      this.$gtag.event("record", {
+        method: "Google",
+        event_category: `star${this.setting.star}`
+      });
       this.getRecord(this.setting.star);
     },
     randomRecord () {
@@ -250,6 +260,8 @@ export default {
     }
   },
   mounted () {
+    document.dispatchEvent(new Event("render-event"));
+
     if (this.$route.query.record) {
       this.currentId = this.$route.query.record;
       this.$gtag.event("record", {

@@ -1,0 +1,57 @@
+{
+  "app": {
+    "title": "Flipper World Jumping Animation Simulator | Prevent Stroke",
+    "nav": "Flipper World Jumping Animation Simulator",
+    "description": "A web page that simulates the animation of the World Flipper. Including random generation, certain 3/4/5 stars, and blood pressure test mode. Prevent stroke, cerebral hemorrhage, and high blood pressure."
+  },
+  "message": {
+    "simulation_record": "This result is the <span style=\"color: #ffcd76\">{total}</span> simulation of this site"
+  },
+  "setting": {
+    "t": "Settings",
+    "random_record": "Random",
+    "specify_record": {
+      "3_star_ball": "3 star",
+      "4_star_ball": "4 star",
+      "5_star_ball": "5 star"
+    }
+  },
+  "blood_pressure_test": {
+    "t": "Blood Pressure Test Mode"
+  },
+  "dialog": {
+    "yes": "Yes",
+    "no": "No"
+  },
+  "warning_message": {
+    "you_will_open_the_blood_pressure_test_mode": "You will open @:blood_pressure_test.t。",
+    "this_website_will_not_be_responsible_for_all_consequences": "This page is <span class=\"red--text\">not responsible</span> for all consequences, including and not limited to the following reactions：",
+    "example": "Cerebral hemorrhage, high blood pressure, stroke..."
+  },
+  "share_url": {
+    "share": "Share",
+    "copy": {
+      "success": "Copied",
+      "error": "Copy Failed"
+    },
+    "error": "Error",
+    "share_a_record_to_you": "Shared an animation record of a jumping platform to you!",
+    "lets_simulate_the_jumping_animation": "Let's simulate the jumping animation!!"
+  },
+  "button": {
+    "random": "Random",
+    "only_3_star_ball": "3 star",
+    "only_4_star_ball": "4 star",
+    "only_5_star_ball": "5 star",
+    "blood_pressure": "Blood pressure test"
+  },
+  "language": {
+    "t": "Language",
+    "zh-tw": "繁體 (台灣)",
+    "zh-hk": "繁體 (香港)",
+    "en": "English",
+    "ja": "日文",
+    "ko": "한국어",
+    "help_message": "Click here to improve the language resource file."
+  }
+}

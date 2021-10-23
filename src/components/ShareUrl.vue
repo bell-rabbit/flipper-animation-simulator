@@ -5,15 +5,15 @@
         <v-container fluid class="pa-0">
           <v-row class="pa-3">
             <v-text-field
-                class="mt-2"
-                label="Share url"
-                filled
-                dense
-                hide-details
-                single-line
-                :value="shareUrl"
-                disabled
-                ref="textField"
+              class="mt-2"
+              label="Share url"
+              filled
+              dense
+              hide-details
+              single-line
+              :value="shareUrl"
+              disabled
+              ref="textField"
             ></v-text-field>
           </v-row>
           <v-row class="justify-end pb-3">
@@ -83,10 +83,12 @@ export default {
       this.$emit("input", newValue);
     },
     value (newValue) {
+      const lang = this.$i18n.locale === "zh-tw" ? "" : this.$i18n.locale + "/";
+
       if (this.currentId) {
-        this.shareUrl = `${window.location.origin}?record=${this.currentId}`;
+        this.shareUrl = `${window.location.origin}/${lang}?record=${this.currentId}`;
       } else {
-        this.shareUrl = `${window.location.origin}`;
+        this.shareUrl = `${window.location.origin}/${lang}`;
       }
       this.dialog = newValue;
     }
