@@ -260,6 +260,8 @@ export default {
     }
   },
   mounted () {
+    document.dispatchEvent(new Event("render-event"));
+
     if (this.$route.query.record) {
       this.currentId = this.$route.query.record;
       this.$gtag.event("record", {

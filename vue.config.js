@@ -1,8 +1,11 @@
+const path = require("path");
+const PrerenderSPAPlugin = require("prerender-spa-plugin");
+const Renderer = PrerenderSPAPlugin.PuppeteerRenderer;
+
 module.exports = {
   transpileDependencies: [
     "vuetify"
   ],
-
   devServer: {
     proxy: {
       "/api": {
@@ -18,6 +21,24 @@ module.exports = {
       localeDir: "lang",
       enableInSFC: false,
       enableBridge: false
+    }
+  },
+  configureWebpack (config) {
+    if (process.env.NODE_ENV === "production") {
+      config.plugins.push(
+        new PrerenderSPAPlugin({
+          staticDir: path.join(__dirname, "dist"),
+          routes: ["/ko", "/en", "/zh-tw", "/zh-hk"],
+          renderer: new Renderer({
+            renderAfterDocumentEvent: "render-event"
+          }),
+          postProcess (renderedRoute) {
+            renderedRoute.html = renderedRoute.html.replace(/<style data-vue-meta="vuetify"[\w\W]*<\/style>/gmi, "");
+            renderedRoute.html = renderedRoute.html.replace(/<div data-app="true"[\w\W]*<\/div>/gmi, "<div id=\"app\"></div>");
+            return renderedRoute;
+          }
+        })
+      );
     }
   }
 };
