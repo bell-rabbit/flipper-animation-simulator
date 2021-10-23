@@ -60,10 +60,10 @@ export default {
   },
   methods: {
     onCopy () {
-      this.$root.$snackbar.Show(this.$tc("share_url.copy.success"));
+      this.$root.$snackbar.show(this.$tc("share_url.copy.success"));
     },
     onError () {
-      this.$root.$snackbar.Show(this.$tc("share_url.copy.error"), this.$tc("share_url.error"));
+      this.$root.$snackbar.show(this.$tc("share_url.copy.error"), this.$tc("share_url.error"));
     },
     share () {
       navigator.share({
