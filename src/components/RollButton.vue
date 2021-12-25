@@ -56,6 +56,7 @@ $zh-tw-y: -5.78px;
 $en-y: -67.2px;
 $ko-y: -128.4px;
 $zh-hk-y: -190.6px;
+$ja-y: -252.8px;
 
 $alert-x: -5.78px;
 $random-x: -189.56px;
@@ -63,8 +64,8 @@ $star-5-x: -373.34px;
 $star-4-x: -557.12px;
 $star-3-x: -740.9px;
 
-$lang-list: ($zh-tw-y, $en-y, $ko-y, $zh-hk-y);
-$lang-name: ('zh-tw', 'en', 'ko', 'zh-hk');
+$lang-list: ($zh-tw-y, $en-y, $ko-y, $zh-hk-y, $ja-y);
+$lang-name: ('zh-tw', 'en', 'ko', 'zh-hk', 'ja');
 
 @for $i from 1 to length($lang-list) +1 {
   .#{nth($lang-name, $i)}-alert {
