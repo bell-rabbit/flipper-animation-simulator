@@ -1,0 +1,57 @@
+{
+  "app": {
+    "title": "ワーフリパチンコ演出シミュレーター | 脳卒中防止",
+    "nav": "ワーフリパチンコ演出シミュレーター",
+    "description": "ワールドフリッパーのパチンコ演出を再現するページです。ランダム生成、☆３／４／５確定および血圧測定モードに対応しています。脳卒中や脳出血、高血圧を予防します。"
+  },
+  "message": {
+    "simulation_record": "この結果はサイトで <span style=\"color: #ffcd76\">{total}</span> 番目に生成されました"
+  },
+  "setting": {
+    "t": "設定",
+    "random_record": "ランダム",
+    "specify_record": {
+      "3_star_ball": "☆３確定",
+      "4_star_ball": "☆４確定",
+      "5_star_ball": "☆５確定"
+    }
+  },
+  "blood_pressure_test": {
+    "t": "血圧測定モード"
+  },
+  "dialog": {
+    "yes": "OK",
+    "no": "キャンセル"
+  },
+  "warning_message": {
+    "you_will_open_the_blood_pressure_test_mode": "@:blood_pressure_test.tを開始します。",
+    "this_website_will_not_be_responsible_for_all_consequences": "本サイトは、以下の症状を含むいかなる結果に対し<span class=\"red--text\">責任を負いません</span>：",
+    "example": "脳出血、高血圧、脳卒中…"
+  },
+  "share_url": {
+    "share": "共有",
+    "copy": {
+      "success": "コピーしました",
+      "error": "コピーできませんでした"
+    },
+    "error": "生成できませんでした",
+    "share_a_record_to_you": "パチンコ演出の動画を送ったよ！",
+    "lets_simulate_the_jumping_animation": "今すぐパチンコ演出を再現しよう！！"
+  },
+  "button": {
+    "random": "ランダム生成",
+    "only_3_star_ball": "★３確定",
+    "only_4_star_ball": "★４確定",
+    "only_5_star_ball": "★５確定",
+    "blood_pressure": "血圧測定"
+  },
+  "language": {
+    "t": "言語",
+    "zh-tw": "中国語（台湾）",
+    "zh-hk": "中国語（香港）",
+    "en": "英語",
+    "ja": "日本語",
+    "ko": "韓国語",
+    "help_message": "翻訳を改善するにはここをクリック"
+  }
+}

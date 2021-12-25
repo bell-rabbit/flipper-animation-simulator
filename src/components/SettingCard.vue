@@ -84,7 +84,8 @@ export default {
         { text: this.$tc("language.zh-tw"), value: "zh-tw" },
         { text: this.$tc("language.zh-hk"), value: "zh-hk" },
         { text: this.$tc("language.en"), value: "en" },
-        { text: this.$tc("language.ko"), value: "ko" }
+        { text: this.$tc("language.ko"), value: "ko" },
+        { text: this.$tc("language.ja"), value: "ja" }
       ],
       selectLanguage: this.$i18n.locale
     };

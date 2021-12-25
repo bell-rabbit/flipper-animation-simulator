@@ -28,7 +28,7 @@ module.exports = {
       config.plugins.push(
         new PrerenderSPAPlugin({
           staticDir: path.join(__dirname, "dist"),
-          routes: ["/ko", "/en", "/zh-tw", "/zh-hk"],
+          routes: ["/ko", "/en", "/zh-tw", "/zh-hk", "/ja"],
           renderer: new Renderer({
             renderAfterDocumentEvent: "render-event"
           }),
